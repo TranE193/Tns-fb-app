@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1018763477145",
+    "firebase_url": "https://ngapp-e1373.firebaseio.com",
+    "project_id": "ngapp-e1373",
+    "storage_bucket": "ngapp-e1373.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018763477145:android:885ce5c07490c64df63808",
+        "android_client_info": {
+          "package_name": "org.nativescript.tnsFBApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018763477145-nsegg0acjskui2io1uu60mif80vg57po.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0VcL_jIz5EQNbrZUL04SHY7rK1hTjnrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018763477145-nsegg0acjskui2io1uu60mif80vg57po.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
