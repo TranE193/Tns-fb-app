@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { isAndroid } from "tns-core-modules/platform";
+import {initFirebase} from "~/app/shared/firebase.common";
 
 @Component({
     selector: "ns-app",
@@ -7,14 +7,7 @@ import { isAndroid } from "tns-core-modules/platform";
     styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-
-    constructor() {
-        // Use the component constructor to inject providers.
-    }
-
-
-
     ngOnInit() {
-
-      }
+        initFirebase();
+    }
 }
