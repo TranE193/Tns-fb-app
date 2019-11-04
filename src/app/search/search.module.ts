@@ -16,4 +16,5 @@ import { SearchComponent } from "./search.component";
         NO_ERRORS_SCHEMA
     ]
 })
-export class SearchModule { }
+export class SearchModule {
+}

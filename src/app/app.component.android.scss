@@ -2,19 +2,19 @@
 
 // Place any CSS rules you want to apply only on Android here
 TabStripItem Label {
-    //color: $primary-color;
-    text-transform: uppercase;
-    font-weight: bold;
+  //color: $primary-color;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 TabStripItem:active Label {
-    //color: $primary-color-active;
+  //color: $primary-color-active;
 }
 
 TabStripItem Image {
-    //color: $primary-color;
+  //color: $primary-color;
 }
 
 TabStripItem:active Image {
-    //color: $primary-color-active;
+  //color: $primary-color-active;
 }

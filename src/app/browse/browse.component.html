@@ -1,8 +1,30 @@
 <ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Browse"></Label>
+    <Label class="action-bar-title" text="Продукты"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf1ea;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
+<GridLayout rows="auto, *" class="page page-content">
+    <GridLayout row="0" columns="*, *">
+        <Button column="0" text="Добавить" (tap)="onButtonTap()" class="add-btn">
+            <!--<FormattedString>-->
+            <!--<Span text="&#xf099;" class="fa"></Span>-->
+            <!--<Span text=" Добавить"></Span>-->
+            <!--</FormattedString>-->
+        </Button>
+        <Label column="1" [text]="list1?.length" class="list-label"></Label>
+    </GridLayout>
+
+    <RadListView [items]="list1" row="1" swipeActions="true" (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
+        <ng-template tkListItemTemplate let-item="item">
+            <StackLayout (tap)="onLayoutTap($event)" class="list-item list" orientation="vertical">
+                <Label class="list-item__label-name" [text]="item.id"></Label>
+                <Label class="list-item__label-text" [text]="getItemView(item)"></Label>
+            </StackLayout>
+        </ng-template>
+
+        <GridLayout *tkListItemSwipeTemplate columns="*, auto">
+            <StackLayout id="delete-view" col="1" class="delete-view" (tap)="onRightSwipeClick($event)">
+                <Image src="font://&#xf1f8;" class="fa"></Image>
+            </StackLayout>
+        </GridLayout>
+    </RadListView>
 </GridLayout>

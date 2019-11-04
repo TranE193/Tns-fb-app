@@ -3,11 +3,13 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 
 import { BrowseRoutingModule } from "./browse-routing.module";
 import { BrowseComponent } from "./browse.component";
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        BrowseRoutingModule
+        BrowseRoutingModule,
+        NativeScriptUIListViewModule
     ],
     declarations: [
         BrowseComponent
@@ -16,4 +18,5 @@ import { BrowseComponent } from "./browse.component";
         NO_ERRORS_SCHEMA
     ]
 })
-export class BrowseModule { }
+export class BrowseModule {
+}

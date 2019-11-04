@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
-import { DataService, IDataItem } from "../../shared/data.service";
+import { DataService, IDataItem } from "../../shared/services/data.service";
 
 @Component({
     selector: "ItemDetail",
@@ -14,7 +14,8 @@ export class ItemDetailComponent implements OnInit {
         private _data: DataService,
         private _route: ActivatedRoute,
         private _routerExtensions: RouterExtensions
-    ) { }
+    ) {
+    }
 
     ngOnInit(): void {
         const id = +this._route.snapshot.params.id;

@@ -18,4 +18,5 @@ import { ItemDetailComponent } from "./item-detail/item-detail.component";
         NO_ERRORS_SCHEMA
     ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {push} from "~/app/shared/firebase.common";
+import { Component, OnInit } from "@angular/core";
+import { FirebaseService } from "~/app/shared/services/firebase.service";
 
 
 @Component({
@@ -7,7 +7,7 @@ import {push} from "~/app/shared/firebase.common";
     templateUrl: "./search.component.html"
 })
 export class SearchComponent implements OnInit {
-    constructor() {
+    constructor(private fs: FirebaseService) {
         // Use the constructor to inject services.
     }
 
@@ -18,9 +18,10 @@ export class SearchComponent implements OnInit {
         const date = new Date().toUTCString();
 
 
-        push('/ideas', {
+        this.fs.push('/ideas', {
             idea: {newIdea: "new_idea_0"},
-            createdAd: date
+            createdAt: date,
+            id: Math.random().toString(36).substring(2) + Date.now().toString(36)
         })
     }
 }

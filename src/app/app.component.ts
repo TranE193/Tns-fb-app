@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {initFirebase} from "~/app/shared/firebase.common";
+import { FirebaseService } from "~/app/shared/services/firebase.service";
 
 @Component({
     selector: "ns-app",
@@ -7,7 +7,10 @@ import {initFirebase} from "~/app/shared/firebase.common";
     styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
+    constructor(private fs: FirebaseService) {
+        fs.initFirebase()
+    }
+
     ngOnInit() {
-        initFirebase();
     }
 }
