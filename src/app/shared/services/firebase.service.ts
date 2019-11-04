@@ -45,4 +45,12 @@ export class FirebaseService {
             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
             : [];
     }
+
+    remove(url: string, id: string) {
+        firebase.remove(`${url}/${id}`).then(() => {
+            console.log(`[*] Info : Your  ${id} data was removed by ${url} url!`);
+        }, (error) => {
+            console.log("[*] Error : While removing your data to Firebase, with error: " + error);
+        });
+    }
 }

@@ -4,8 +4,6 @@ import { FirebaseService } from "~/app/shared/services/firebase.service";
 import { View } from "tns-core-modules/ui/core/view";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { RadListViewComponent } from "nativescript-ui-listview/angular";
-import { Label } from "tns-core-modules/ui/label";
-import { topmost } from "tns-core-modules/ui/frame";
 
 @Component({
     selector: "Browse",
@@ -21,13 +19,13 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
     subscription: Subscription;
     gifts$: Observable<any>;
 
-    constructor(private fs: FirebaseService) { }
+    constructor(private firebaseService: FirebaseService) { }
 
     @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
     ngOnInit(): void {
 
-        this.gifts$ = this.fs.getMyWishList();
+        this.gifts$ = this.firebaseService.getMyWishList();
         // this.subscription = data => this.list1 = data
         this.gifts$.subscribe(data => this.list1 = data)
 
@@ -57,7 +55,7 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
     onButtonTap(): void {
         const date: Date = new Date();
 
-        this.fs.push('/ideas', {
+        this.firebaseService.push('/ideas', {
             idea1: {newIdea: "new_idea_1"},
             createdAt: date.toUTCString(),
             // id: Math.random().toString(36).substring(2) + Date.now().toString(36)
@@ -72,7 +70,7 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
         return item.id;
     }
 
-    public onSwipeCellStarted(args: ListViewEventData) {
+    onSwipeCellStarted(args: ListViewEventData) {
         const swipeLimits = args.data.swipeLimits;
         const swipeView = args.object;
         const rightItem = swipeView.getViewById<View>("delete-view");
@@ -81,17 +79,17 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
         swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
     }
 
-    public onRightSwipeClick(args) {
-        console.log("Right swipe click");
-        // this.myListViewComponent.listView.notifySwipeToExecuteFinished();
+    onRightSwipeClick(args: ListViewEventData) {
+        const item = args.object.bindingContext;
+        this.firebaseService.remove('/ideas', item.id);
     }
 
-    public onLayoutTap(args) {
-        const message = "Tap on Layout for item: " + (args.object.bindingContext).name;
+    onLayoutTap(args) {
+        const message = "Tap on Layout for item: " + (args.object.bindingContext).id;
         console.log(message);
         // this.myListViewComponent.listView.notifySwipeToExecuteFinished();
-        let lbl = <Label>topmost().getViewById("lbl");
-        lbl.text += " \n" + message;
+        // let lbl = <Label>topmost().getViewById("lbl");
+        // lbl.text += " \n" + message;
     }
 
 }
