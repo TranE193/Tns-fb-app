@@ -3,20 +3,24 @@
 </ActionBar>
 
 <GridLayout rows="auto, *" class="page page-content">
-    <GridLayout row="0" columns="*, *">
-        <Button column="0" text="Добавить" (tap)="onButtonTap()" class="add-btn">
+    <GridLayout row="0" columns="*, *, *">
+        <!--<TextField  column="0" hint="Продукт" class="input input-border text-input"></TextField>-->
+        <TextField [text]="name" (textChange)="onTextNameChange($event)" column="0" hint="Продукт"
+                   class="input input-border text-input"></TextField>
+        <TextField [text]="amount" (textChange)="onTextAmountChange($event)" column="1" hint="Количество"
+                   keyboardType="number" class="input input-border text-input"></TextField>
+        <Button column="2" text="Добавить" (tap)="onButtonTap()" class="add-btn">
             <!--<FormattedString>-->
             <!--<Span text="&#xf099;" class="fa"></Span>-->
             <!--<Span text=" Добавить"></Span>-->
             <!--</FormattedString>-->
         </Button>
-        <Label column="1" [text]="list1?.length" class="list-label"></Label>
     </GridLayout>
 
     <RadListView [items]="list1" row="1" swipeActions="true" (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
         <ng-template tkListItemTemplate let-item="item">
             <StackLayout (tap)="onLayoutTap($event)" class="list-item list" orientation="vertical">
-                <Label class="list-item__label-name" [text]="item.id"></Label>
+                <Label class="list-item__label-name" [text]="getTextView(item)"></Label>
                 <Label class="list-item__label-text" [text]="getItemView(item)"></Label>
             </StackLayout>
         </ng-template>

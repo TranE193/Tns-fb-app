@@ -4,6 +4,7 @@ import { FirebaseService } from "~/app/shared/services/firebase.service";
 import { View } from "tns-core-modules/ui/core/view";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { RadListViewComponent } from "nativescript-ui-listview/angular";
+import { TextField } from "tns-core-modules/ui/text-field";
 
 @Component({
     selector: "Browse",
@@ -15,6 +16,8 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
         {id: 1, text: 'text_1'},
         {id: 2, text: 'text_2'},
     ];
+    name = '';
+    amount = 0;
     list1: [];
     subscription: Subscription;
     gifts$: Observable<any>;
@@ -24,24 +27,9 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
     @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
     ngOnInit(): void {
-
         this.gifts$ = this.firebaseService.getMyWishList();
         // this.subscription = data => this.list1 = data
-        this.gifts$.subscribe(data => this.list1 = data)
-
-        // @ts-ignore
-        // this.list1 = [
-        //     { id: 1, name: 'name_1'},
-        //     { id: 1, name: 'name_1'},
-        //     { id: 1, name: 'name_1'}
-        // ];
-        // this.list1 = [
-        //     'name_1',
-        //     'name_1',
-        //     'name_1',
-        //     'name_1',
-        // ];
-        // console.log('s', this.gifts$);
+        this.gifts$.subscribe(data => this.list1 = data);
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -53,13 +41,25 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     onButtonTap(): void {
+        console.log('idea', {name: this.name, amount: this.amount});
+
         const date: Date = new Date();
 
         this.firebaseService.push('/ideas', {
-            idea1: {newIdea: "new_idea_1"},
+            idea: {name: this.name, amount: this.amount},
             createdAt: date.toUTCString(),
             // id: Math.random().toString(36).substring(2) + Date.now().toString(36)
-        })
+        });
+
+        this.name = '';
+        this.amount = 0;
+    }
+
+    getTextView(item): string {
+        if(item.idea && item.idea.name) {
+            return `${item.idea.name}, Кол-во: ${item.idea.amount || 0} шт.`;
+        }
+        return item.id;
     }
 
     getItemView(item): string {
@@ -92,4 +92,13 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
         // lbl.text += " \n" + message;
     }
 
+    onTextNameChange(args) {
+        let textField = <TextField>args.object;
+        this.name = textField.text;
+    }
+
+    onTextAmountChange(args) {
+        let textField = <TextField>args.object;
+        this.amount = parseInt(textField.text) || 0;
+    }
 }
