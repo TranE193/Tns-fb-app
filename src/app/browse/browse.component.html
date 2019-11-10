@@ -4,7 +4,6 @@
 
 <GridLayout rows="auto, *" class="page page-content">
     <GridLayout row="0" columns="*, *, *">
-        <!--<TextField  column="0" hint="Продукт" class="input input-border text-input"></TextField>-->
         <TextField [text]="name" (textChange)="onTextNameChange($event)" column="0" hint="Продукт"
                    class="input input-border text-input"></TextField>
         <TextField [text]="amount" (textChange)="onTextAmountChange($event)" column="1" hint="Количество"

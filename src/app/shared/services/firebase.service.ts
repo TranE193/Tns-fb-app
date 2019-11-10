@@ -6,17 +6,14 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 export class FirebaseService {
-    items: any;
-
-    constructor(private ngZone: NgZone) {
-    }
+    constructor(private ngZone: NgZone) { }
 
     initFirebase() {
         firebase.init().then(() => console.log("firebase.init done"),
             (error) => console.log("firebase.init error: " + error));
     }
 
-    push(url: string, value: object) {
+    createItem(url: string, value: object) {
         firebase.push(url, value).then(() => {
             console.log(`[*] Info : Your data was pushed by ${url} url!`);
         }, (error) => {
@@ -24,31 +21,78 @@ export class FirebaseService {
         });
     }
 
-    getMyWishList(): Observable<any> {
+    // getList(url:string): [] {
+    //
+    //
+    //     var a = firebase.query(
+    //         this.onQueryEvent,
+    //         `/${url}`,
+    //         {
+    //             // set this to true if you want to check if the value exists or just want the event to fire once
+    //             // default false, so it listens continuously.
+    //             // Only when true, this function will return the data in the promise as well!
+    //             singleEvent: true,
+    //             // order by company.country
+    //             orderBy: {
+    //                 type: firebase.QueryOrderByType.CHILD,
+    //                 value: 'createdAt' // mandatory when type is 'child'
+    //             },
+    //             // ranges: [
+    //             //     {
+    //             //         type: firebase.QueryRangeType.START_AT,
+    //             //         value: 1999
+    //             //     },
+    //             //     {
+    //             //         type: firebase.QueryRangeType.END_AT,
+    //             //         value: 2000
+    //             //     }
+    //             // ],
+    //             limit: {
+    //                 type: firebase.QueryLimitType.LAST,
+    //                 value: 5
+    //             }
+    //         }
+    //     ).then(result => result);
+    //     console.log('a', a);
+    //     return [];
+    // }
+    //
+    // onQueryEvent(result) {
+    //     // note that the query returns 1 match at a time
+    //     // in the order specified in the query
+    //     console.log('log', result);
+    //     if (!result.error) {
+    //         console.log("Event type: " + result.type);
+    //         console.log("Key: " + result.key);
+    //         console.log("Value: " + JSON.stringify(result.value)); // a JSON object
+    //         console.log("Children: " + JSON.stringify(result.children)); // an array, added in plugin v 8.0.0
+    //     }
+    //     return result;
+    // };
+
+    getObservableList(url: string, handleSnapshot): Observable<any> {
         return new Observable((observer: any) => {
-            let path = 'ideas';
             let onValueEvent = (snapshot: any) => {
                 this.ngZone.run(() => {
-                    let results = this.handleSnapshot(snapshot.value);
-                    console.log(JSON.stringify(results));
+                    let results = handleSnapshot(snapshot.value);
                     observer.next(results);
                 });
             };
-            firebase.addValueEventListener(onValueEvent, `/${path}`);
+            firebase.addValueEventListener(onValueEvent, `/${url}`);
         });
     }
 
-    handleSnapshot(data: any) {
-        return data
-            ? Object.keys(data)
-            .map(key => ({...{id: key}, ...data[key]}))
-            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-            : [];
+    updateItem(url: string, itemId: string, value) {
+        firebase.update(`/${url}/${itemId}`, value).then(() => {
+            console.log(`[*] Info : Your  ${itemId} data was updated by ${url} url!`);
+        }, (error) => {
+            console.log("[*] Error : While updating your data to Firebase, with error: " + error);
+        });
     }
 
-    remove(url: string, id: string) {
-        firebase.remove(`${url}/${id}`).then(() => {
-            console.log(`[*] Info : Your  ${id} data was removed by ${url} url!`);
+    removeItem(url: string, itemId: string) {
+        firebase.remove(`/${url}/${itemId}`).then(() => {
+            console.log(`[*] Info : Your  ${itemId} data was removed by ${url} url!`);
         }, (error) => {
             console.log("[*] Error : While removing your data to Firebase, with error: " + error);
         });

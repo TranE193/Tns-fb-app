@@ -1,10 +1,10 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
-import { FirebaseService } from "~/app/shared/services/firebase.service";
 import { View } from "tns-core-modules/ui/core/view";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { RadListViewComponent } from "nativescript-ui-listview/angular";
 import { TextField } from "tns-core-modules/ui/text-field";
+import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
 
 @Component({
     selector: "Browse",
@@ -22,12 +22,12 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
     subscription: Subscription;
     gifts$: Observable<any>;
 
-    constructor(private firebaseService: FirebaseService) { }
+    constructor(private groceryService: GroceryService) { }
 
     @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
     ngOnInit(): void {
-        this.gifts$ = this.firebaseService.getMyWishList();
+        this.gifts$ = this.groceryService.getObservableList();
         // this.subscription = data => this.list1 = data
         this.gifts$.subscribe(data => this.list1 = data);
     }
@@ -41,12 +41,12 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     onButtonTap(): void {
-        console.log('idea', {name: this.name, amount: this.amount});
 
         const date: Date = new Date();
 
-        this.firebaseService.push('/ideas', {
-            idea: {name: this.name, amount: this.amount},
+        this.groceryService.create({
+            name: this.name,
+            amount: this.amount,
             createdAt: date.toUTCString(),
             // id: Math.random().toString(36).substring(2) + Date.now().toString(36)
         });
@@ -81,7 +81,7 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
 
     onRightSwipeClick(args: ListViewEventData) {
         const item = args.object.bindingContext;
-        this.firebaseService.remove('/ideas', item.id);
+        this.groceryService.remove(item.id);
     }
 
     onLayoutTap(args) {

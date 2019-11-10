@@ -18,10 +18,7 @@ export class SearchComponent implements OnInit {
         const date = new Date().toUTCString();
 
 
-        this.fs.push('/ideas', {
-            idea: {newIdea: "new_idea_0"},
-            createdAt: date,
-            id: Math.random().toString(36).substring(2) + Date.now().toString(36)
-        })
+        // this.fs.updateItem('ideas', '-LtG-cWGUw5AlGZ_Yjyc', {idea: {amount: 333}})
+        // this.fs.getList('ideas')
     }
 }

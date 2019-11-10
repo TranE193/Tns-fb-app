@@ -1,33 +1,31 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Observable } from "rxjs";
-import { Grocery } from "~/app/shared/models/grocery";
-import * as firebase from "nativescript-plugin-firebase";
+import { FirebaseService } from "~/app/shared/services/firebase.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class GroceryService {
+    path: string = 'groceries';
 
-    constructor(private ngZone: NgZone) {
-    }
+    constructor(private ngZone: NgZone, private firebaseService: FirebaseService) { }
 
-    getGroceries(): Observable<Grocery[]> {
-        return new Observable((observer: any) => {
-            let path = 'groceries';
-            let onValueEvent = (snapshot: any) => {
-                this.ngZone.run(() => {
-                    let results = this.handleSnapshot(snapshot.value);
-                    console.log(JSON.stringify(results));
-                    observer.next(results);
-                });
-            };
-            firebase.addValueEventListener(onValueEvent, `/${path}`);
-        });
+    getObservableList() {
+        return this.firebaseService.getObservableList(this.path, this.handleSnapshot);
     }
 
     handleSnapshot(data: any) {
         return data
-            ? Object.keys(data).map(key => ({...{id: key}, ...data[key]}))
+            ? Object.keys(data)
+            .map(key => ({...{id: key}, ...data[key]}))
+            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
             : [];
+    }
+
+    create(item) {
+        this.firebaseService.createItem(this.path, item);
+    }
+
+    remove(id: string) {
+        this.firebaseService.removeItem(this.path, id);
     }
 }
