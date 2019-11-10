@@ -56,8 +56,8 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     getTextView(item): string {
-        if(item.idea && item.idea.name) {
-            return `${item.idea.name}, Кол-во: ${item.idea.amount || 0} шт.`;
+        if(item && item.name) {
+            return `${item.name}, Кол-во: ${item.amount || 0} шт.`;
         }
         return item.id;
     }
