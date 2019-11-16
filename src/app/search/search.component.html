@@ -5,5 +5,8 @@
 <GridLayout class="page page-content">
     <Label class="page-icon fa" text="&#xf002;"></Label>
     <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
-    <Button text="Button" (tap)="onButtonTap()"></Button>
+
+    <StackLayout class="p-15" sdkExampleTitle sdkToggleNavButton>
+        <Button class="btn btn-primary btn-active" text="Display Prompt Dialog" (tap)="displayPromptDialog()"></Button>
+    </StackLayout>
 </GridLayout>

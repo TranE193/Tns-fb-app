@@ -4,6 +4,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { BrowseRoutingModule } from "./browse-routing.module";
 import { BrowseComponent } from "./browse.component";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+import { GroceryComponent } from './grocery/grocery.component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
         NativeScriptUIListViewModule
     ],
     declarations: [
-        BrowseComponent
+        BrowseComponent,
+        GroceryComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

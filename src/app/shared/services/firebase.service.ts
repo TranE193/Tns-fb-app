@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from "nativescript-plugin-firebase";
-import { Observable } from "rxjs";
+import { from, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -96,5 +96,9 @@ export class FirebaseService {
         }, (error) => {
             console.log("[*] Error : While removing your data to Firebase, with error: " + error);
         });
+    }
+
+    getItem(url: string, id: string): Observable<any> {
+        return from(firebase.getValue(`/${url}/${id}`).then(res => res.value))
     }
 }

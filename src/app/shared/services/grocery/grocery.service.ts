@@ -1,5 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { FirebaseService } from "~/app/shared/services/firebase.service";
+import { Grocery } from "~/app/shared/models/grocery";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -27,5 +29,9 @@ export class GroceryService {
 
     remove(id: string) {
         this.firebaseService.removeItem(this.path, id);
+    }
+
+    getItem(id: string): Observable<Grocery> {
+        return this.firebaseService.getItem(this.path, id);
     }
 }

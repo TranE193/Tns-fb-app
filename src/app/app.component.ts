@@ -11,6 +11,5 @@ export class AppComponent implements OnInit {
         fs.initFirebase()
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 }

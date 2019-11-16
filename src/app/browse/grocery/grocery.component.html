@@ -1,0 +1,14 @@
+<ActionBar class="action-bar">
+    <NavigationButton (tap)="onBackTap()" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label class="action-bar-title" [text]="grocery?.name"></Label>
+</ActionBar>
+
+<GridLayout>
+    <GridLayout rows="auto, auto, auto">
+        <TextField row="0" [text]="grocery?.name" (textChange)="onTextNameChange($event)" hint="Продукт"
+                   class="input input-border text-input"></TextField>
+        <TextField row="1" [text]="grocery?.amount" (textChange)="onTextAmountChange($event)" hint="Количество"
+                   keyboardType="number" class="input input-border text-input"></TextField>
+        <Button row="2" text="Сохранить" (tap)="onButtonTap()" class="add-btn"></Button>
+    </GridLayout>
+</GridLayout>
