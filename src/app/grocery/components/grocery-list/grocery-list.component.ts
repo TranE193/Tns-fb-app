@@ -1,24 +1,24 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from "@angular/core";
-import { Observable } from "rxjs";
-import { View } from "tns-core-modules/ui/core/view";
-import { ListViewEventData } from "nativescript-ui-listview";
-import { RadListViewComponent } from "nativescript-ui-listview/angular";
-import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Grocery } from "~/app/shared/models/grocery";
+import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
+import { RadListViewComponent } from "nativescript-ui-listview/angular";
+import { ListViewEventData } from "nativescript-ui-listview";
+import { View } from "tns-core-modules/ui/core/view";
+import { TextField } from "tns-core-modules/ui/text-field";
+import { Observable } from "rxjs";
 
 @Component({
-    selector: "Browse",
-    styleUrls: ["./browse.component.scss"],
-    templateUrl: "./browse.component.html"
+    selector: 'ns-grocery-list',
+    templateUrl: './grocery-list.component.html',
+    styleUrls: ['./grocery-list.component.scss']
 })
-export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
+export class GroceryListComponent implements OnInit, OnChanges, OnDestroy {
     filter: string = '';
     groceries: Grocery[];
     groceries$: Observable<any>;
+    @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
     constructor(private groceryService: GroceryService) { }
-
-    @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
     ngOnInit(): void {
         this.groceries$ = this.groceryService.getObservableList();
@@ -74,5 +74,11 @@ export class BrowseComponent implements OnInit, OnChanges, OnDestroy {
 
         // this.grocery.name = '';
         // this.grocery.amount = 0;
+    }
+
+    onFilterChange(args) {
+        let textField = <TextField>args.object;
+        // this.grocery.name = textField.text;
+        console.log(textField.text);
     }
 }

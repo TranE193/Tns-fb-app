@@ -1,10 +1,9 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Grocery } from "~/app/shared/models/grocery";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular";
-import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
-import { Subscription } from "rxjs";
 import { TextField } from "tns-core-modules/ui/text-field";
+import { Grocery } from "~/app/shared/models/grocery";
+import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
 
 @Component({
     selector: 'ns-grocery',
@@ -13,7 +12,6 @@ import { TextField } from "tns-core-modules/ui/text-field";
 })
 export class GroceryComponent implements OnInit, OnChanges {
     grocery: Grocery;
-    subscription: Subscription;
 
     constructor(private route: ActivatedRoute, private routerExtensions: RouterExtensions, public groceryService: GroceryService) { }
 

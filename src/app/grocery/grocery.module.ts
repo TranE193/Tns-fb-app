@@ -1,24 +1,24 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 
-import { BrowseRoutingModule } from "./browse-routing.module";
-import { BrowseComponent } from "./browse.component";
+import { GroceryRoutingModule } from "./grocery-routing.module";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
-import { GroceryComponent } from './grocery/grocery.component';
+import { GroceryComponent } from './components/grocery/grocery.component';
+import { GroceryListComponent } from './components/grocery-list/grocery-list.component';
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        BrowseRoutingModule,
+        GroceryRoutingModule,
         NativeScriptUIListViewModule
     ],
     declarations: [
-        BrowseComponent,
-        GroceryComponent
+        GroceryComponent,
+        GroceryListComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class BrowseModule {
+export class GroceryModule {
 }

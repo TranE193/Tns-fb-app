@@ -4,7 +4,7 @@
 
 <GridLayout rows="auto, *" class="page page-content">
     <GridLayout row="0" columns="*, auto">
-        <TextField [text]="filter" column="0" hint="Найти"
+        <TextField column="0" [text]="filter" (textChange)="onFilterChange($event)" hint="Найти"
                    class="input input-border text-input"></TextField>
         <Button column="1" text="Добавить" (tap)="onAddButtonTap()" class="add-btn"></Button>
     </GridLayout>
