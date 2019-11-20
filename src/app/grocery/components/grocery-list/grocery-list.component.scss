@@ -29,11 +29,17 @@
   border-bottom-color: #ddd;
 
   &__label-name {
-    font-size: 20pt;
+    font-size: 22pt;
     margin-bottom: 8pt;
   }
 
-  &__label-text {
+  &__label-date {
     font-size: 12pt;
+    text-align: right;
+  }
+
+  &__label-amount {
+    font-size: 20pt;
+    text-align: right;
   }
 }

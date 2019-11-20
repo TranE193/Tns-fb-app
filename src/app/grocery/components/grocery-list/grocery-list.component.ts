@@ -33,14 +33,21 @@ export class GroceryListComponent implements OnInit, OnChanges, OnDestroy {
         // this.gifts$.unsubscribe(data => this.list = data)
     }
 
-    getTextView(item): string {
-        if(item && item.name) {
-            return `${item.name}, Кол-во: ${item.amount || 0} шт.`;
-        }
-        return item.id;
-    }
+    // getTextView(item): string {
+    //     if(item && item.name) {
+    //         return `${item.name}, Кол-во: ${item.amount || 0} шт.`;
+    //     }
+    //     return item.id;
+    // }
+    //
+    // getTextView(item): string {
+    //     if(item && item.name) {
+    //         return `${item.name}, Кол-во: ${item.amount || 0} шт.`;
+    //     }
+    //     return item.id;
+    // }
 
-    getItemView(item): string {
+    getDateView(item): string {
         if(item.createdAt) {
             const date: Date = new Date(item.createdAt);
             return date.toLocaleString().substr(4, 20);
