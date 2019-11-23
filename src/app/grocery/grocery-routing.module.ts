@@ -2,12 +2,12 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
-import { GroceryListComponent } from "~/app/grocery/components/grocery-list/grocery-list.component";
-import { GroceryComponent } from "~/app/grocery/components/grocery/grocery.component";
+import { GroceryListContainerComponent } from "~/app/grocery/containers/grocery-list-container/grocery-list-container.component";
+import { GroceryContainerComponent } from "~/app/grocery/containers/grocery-container/grocery-container.component";
 
 const routes: Routes = [
-    {path: "", component: GroceryListComponent},
-    {path: ":id", component: GroceryComponent},
+    {path: "", component: GroceryListContainerComponent},
+    {path: ":id", component: GroceryContainerComponent},
 ];
 
 @NgModule({

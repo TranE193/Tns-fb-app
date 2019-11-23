@@ -9,7 +9,9 @@
         <Button column="1" text="Добавить" (tap)="onAddButtonTap()" class="add-btn"></Button>
     </GridLayout>
 
-    <RadListView [items]="groceries" row="1" swipeActions="true"
+    <RadListView row="1" swipeActions="true"
+                 [items]="groceries"
+                 [filteringFunction]="filtering"
                  (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
         <ng-template tkListItemTemplate let-item="item">
             <StackLayout [nsRouterLink]="[item?.id]" class="list-item list" orientation="vertical">
@@ -17,7 +19,6 @@
                     <Label col="0" class="list-item__label-name" textwrap="true" [text]="item.name"></Label>
                     <Label col="1" class="list-item__label-amount" [text]="item.amount + ' шт'"></Label>
                 </GridLayout>
-
                 <Label class="list-item__label-date" [text]="getDateView(item)"></Label>
             </StackLayout>
         </ng-template>

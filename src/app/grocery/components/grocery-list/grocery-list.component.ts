@@ -1,51 +1,31 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Grocery } from "~/app/shared/models/grocery";
 import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
 import { RadListViewComponent } from "nativescript-ui-listview/angular";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
 import { TextField } from "tns-core-modules/ui/text-field";
-import { Observable } from "rxjs";
 
 @Component({
     selector: 'ns-grocery-list',
     templateUrl: './grocery-list.component.html',
     styleUrls: ['./grocery-list.component.scss']
 })
-export class GroceryListComponent implements OnInit, OnChanges, OnDestroy {
+export class GroceryListComponent implements OnInit {
     filter: string = '';
-    groceries: Grocery[];
-    groceries$: Observable<any>;
+
+    @Input() groceries: Grocery[];
     @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
     constructor(private groceryService: GroceryService) { }
 
-    ngOnInit(): void {
-        this.groceries$ = this.groceryService.getObservableList();
-        this.groceries$.subscribe(data => this.groceries = data);
-    }
+    ngOnInit(): void {}
 
-    ngOnChanges(changes: SimpleChanges) {
-        // console.log('changes', changes)
-    }
-
-    ngOnDestroy() {
-        // this.gifts$.unsubscribe(data => this.list = data)
-    }
-
-    // getTextView(item): string {
-    //     if(item && item.name) {
-    //         return `${item.name}, Кол-во: ${item.amount || 0} шт.`;
-    //     }
-    //     return item.id;
+    // ngOnChanges(changes: SimpleChanges) {
+    //     console.log('changes', changes)
     // }
-    //
-    // getTextView(item): string {
-    //     if(item && item.name) {
-    //         return `${item.name}, Кол-во: ${item.amount || 0} шт.`;
-    //     }
-    //     return item.id;
-    // }
+
+    filtering(item: Grocery): boolean { return !!item};
 
     getDateView(item): string {
         if(item.createdAt) {
@@ -84,8 +64,9 @@ export class GroceryListComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     onFilterChange(args) {
-        let textField = <TextField>args.object;
-        // this.grocery.name = textField.text;
-        console.log(textField.text);
+        const filterText = (<TextField>args.object).text;
+        this.filtering = (item: Grocery) => {
+            return item && item.name.toLowerCase().includes(filterText.toLowerCase());
+        };
     }
 }

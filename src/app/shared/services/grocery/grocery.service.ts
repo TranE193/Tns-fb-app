@@ -11,7 +11,7 @@ export class GroceryService {
 
     constructor(private ngZone: NgZone, private firebaseService: FirebaseService) { }
 
-    getObservableList() {
+    getList() {
         return this.firebaseService.getObservableList(this.path, this.handleSnapshot);
     }
 
