@@ -99,6 +99,6 @@ export class FirebaseService {
     }
 
     getItem(url: string, id: string): Observable<any> {
-        return from(firebase.getValue(`/${url}/${id}`).then(res => res.value))
+        return from(firebase.getValue(`/${url}/${id}`).then(res => ({id, ...res.value})))
     }
 }

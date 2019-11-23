@@ -1,1 +1,4 @@
-<ns-grocery></ns-grocery>
+<ns-grocery
+        (upsertGrocery)="onUpsertGrocery($event)"
+        [grocery]="grocery$ | async"
+></ns-grocery>

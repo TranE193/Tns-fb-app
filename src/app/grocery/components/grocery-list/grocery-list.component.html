@@ -6,7 +6,7 @@
     <GridLayout row="0" columns="*, auto">
         <TextField column="0" [text]="filter" (textChange)="onFilterChange($event)" hint="Найти"
                    class="input input-border text-input"></TextField>
-        <Button column="1" text="Добавить" (tap)="onAddButtonTap()" class="add-btn"></Button>
+        <Button column="1" text="Добавить" [nsRouterLink]="['new']" class="add-btn"></Button>
     </GridLayout>
 
     <RadListView row="1" swipeActions="true"
@@ -19,7 +19,7 @@
                     <Label col="0" class="list-item__label-name" textwrap="true" [text]="item.name"></Label>
                     <Label col="1" class="list-item__label-amount" [text]="item.amount + ' шт'"></Label>
                 </GridLayout>
-                <Label class="list-item__label-date" [text]="getDateView(item)"></Label>
+                <Label class="list-item__label-date" [text]="getUpdatedDateView(item)"></Label>
             </StackLayout>
         </ng-template>
 

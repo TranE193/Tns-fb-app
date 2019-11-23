@@ -1,14 +1,21 @@
 <ActionBar class="action-bar">
     <NavigationButton (tap)="onBackTap()" android.systemIcon="ic_menu_back"></NavigationButton>
-    <Label [text]="grocery?.name" class="action-bar-title"></Label>
+    <Label [text]="grocery ? grocery.name : 'Новая покупка'" class="action-bar-title"></Label>
 </ActionBar>
 
-<GridLayout>
-    <GridLayout rows="auto, auto, auto">
-        <TextField row="0" [text]="grocery?.name" (textChange)="onTextNameChange($event)" hint="Продукт"
-                   class="input input-border text-input"></TextField>
-        <TextField row="1" [text]="grocery?.amount" (textChange)="onTextAmountChange($event)" hint="Количество"
-                   keyboardType="number" class="input input-border text-input"></TextField>
-        <Button row="2" text="Сохранить" (tap)="onButtonTap()" class="add-btn"></Button>
-    </GridLayout>
+<GridLayout rows="auto, auto, auto">
+    <TextField row="0"
+               hint="Продукт"
+               class="input input-border text-input"
+               [text]="grocery ? grocery.name : groceryForm.name"
+               (textChange)="onTextNameChange($event)"
+    ></TextField>
+    <TextField row="1"
+               hint="Количество"
+               keyboardType="number"
+               class="input input-border text-input"
+               [text]="grocery ? grocery.amount : groceryForm.amount"
+               (textChange)="onTextAmountChange($event)"
+    ></TextField>
+    <Button row="2" [text]="grocery ? 'Сохранить' : 'Создать'" (tap)="onButtonTap()" class="add-btn"></Button>
 </GridLayout>

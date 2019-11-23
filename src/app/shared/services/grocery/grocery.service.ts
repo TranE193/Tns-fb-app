@@ -19,7 +19,7 @@ export class GroceryService {
         return data
             ? Object.keys(data)
             .map(key => ({...{id: key}, ...data[key]}))
-            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+            .sort((a: Grocery, b: Grocery) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
             : [];
     }
 
@@ -29,6 +29,10 @@ export class GroceryService {
 
     remove(id: string) {
         this.firebaseService.removeItem(this.path, id);
+    }
+
+    update(id, item) {
+        this.firebaseService.updateItem(this.path, id, item);
     }
 
     getItem(id: string): Observable<Grocery> {

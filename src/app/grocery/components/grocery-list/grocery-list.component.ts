@@ -21,19 +21,7 @@ export class GroceryListComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    // ngOnChanges(changes: SimpleChanges) {
-    //     console.log('changes', changes)
-    // }
-
     filtering(item: Grocery): boolean { return !!item};
-
-    getDateView(item): string {
-        if(item.createdAt) {
-            const date: Date = new Date(item.createdAt);
-            return date.toLocaleString().substr(4, 20);
-        }
-        return item.id;
-    }
 
     onSwipeCellStarted(args: ListViewEventData) {
         const swipeLimits = args.data.swipeLimits;
@@ -49,24 +37,18 @@ export class GroceryListComponent implements OnInit {
         this.groceryService.remove(item.id);
     }
 
-    onAddButtonTap(): void {
-        const date: Date = new Date();
-
-        this.groceryService.create({
-            name: 'this.name',
-            amount: 'this.amount',
-            createdAt: date.toUTCString(),
-            // id: Math.random().toString(36).substring(2) + Date.now().toString(36)
-        });
-
-        // this.grocery.name = '';
-        // this.grocery.amount = 0;
-    }
-
     onFilterChange(args) {
         const filterText = (<TextField>args.object).text;
         this.filtering = (item: Grocery) => {
             return item && item.name.toLowerCase().includes(filterText.toLowerCase());
         };
+    }
+
+    getUpdatedDateView(item): string {
+        if(item.updatedAt) {
+            const date: Date = new Date(item.updatedAt);
+            return date.toLocaleString().substr(4, 20);
+        }
+        return '';
     }
 }
