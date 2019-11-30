@@ -27,7 +27,8 @@
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|locale|uiMode"
 			android:theme="@style/LaunchScreenTheme">
 
-			<meta-data android:name="SET_THEME_ON_LAUNCH" android:resource="@style/AppTheme" />
+			<meta-data android:name="SET_THEME_ON_LAUNCH" android:resource="@style/AppTheme"
+					   android:value="ca-app-pub-1208352245747809~6080053346"/>
 
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

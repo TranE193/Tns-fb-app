@@ -5,6 +5,8 @@ import { RadListViewComponent } from "nativescript-ui-listview/angular";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
 import { TextField } from "tns-core-modules/ui/text-field";
+import { UserService } from "~/app/shared/services/user/user.service";
+import { User } from "nativescript-plugin-firebase";
 
 @Component({
     selector: 'ns-grocery-list',
@@ -15,9 +17,10 @@ export class GroceryListComponent implements OnInit {
     filter: string = '';
 
     @Input() groceries: Grocery[];
+    @Input() currentUser: User;
     @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
-    constructor(private groceryService: GroceryService) { }
+    constructor(private groceryService: GroceryService, private userService: UserService) { }
 
     ngOnInit(): void {}
 
@@ -50,5 +53,9 @@ export class GroceryListComponent implements OnInit {
             return date.toLocaleString().substr(4, 20);
         }
         return '';
+    }
+
+    logout() {
+        this.userService.logout();
     }
 }

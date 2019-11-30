@@ -1,5 +1,8 @@
 <ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Продукты"></Label>
+    <GridLayout columns="*, auto">
+        <Label class="action-bar-title" column="0" text="Продукты"></Label>
+        <Button (tap)="logout()" *ngIf="currentUser" column="1" text="Выйти"></Button>
+    </GridLayout>
 </ActionBar>
 
 <GridLayout rows="auto, *" class="page page-content">

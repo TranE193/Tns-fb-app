@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { capitalizationType, inputType, prompt, PromptOptions, PromptResult } from "tns-core-modules/ui/dialogs";
+import { UserService } from "~/app/shared/services/user/user.service";
+import { Observable } from "rxjs";
+import { User } from "nativescript-plugin-firebase";
 
 
 @Component({
@@ -7,24 +10,18 @@ import { capitalizationType, inputType, prompt, PromptOptions, PromptResult } fr
     templateUrl: "./search.component.html"
 })
 export class SearchComponent implements OnInit {
-    constructor() {
+    email = 'ddseliverstov@gmail.com';
+    password = 'TranE193';
+    user$: Observable<User>;
+
+
+    constructor(public userService: UserService) {
         // Use the constructor to inject services.
     }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     displayPromptDialog() {
-        // >> prompt-dialog-code
-        /*
-        import {
-            prompt,
-            PromptResult,
-            PromptOptions,
-            inputType,
-            capitalizationType
-        } from "tns-core-modules/ui/dialogs";
-        */
         let options: PromptOptions = {
             title: "Hey There",
             // defaultText: " Enter your mood ",
@@ -40,6 +37,19 @@ export class SearchComponent implements OnInit {
         prompt(options).then((result: PromptResult) => {
             console.log("Hello, " + result.text);
         });
-        // << prompt-dialog-code
+    }
+
+    createUser() {
+        console.log('createUser');
+        this.userService.createUser(this.email, this.password)
+    }
+
+    login() {
+        console.log('login');
+        this.user$ = this.userService.login(this.email, this.password)
+    }
+
+    logout() {
+        this.userService.logout();
     }
 }

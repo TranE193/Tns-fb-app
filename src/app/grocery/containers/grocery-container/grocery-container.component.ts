@@ -11,7 +11,7 @@ import { Grocery } from "~/app/shared/models/grocery";
 })
 export class GroceryContainerComponent implements OnInit {
 
-    grocery$: Observable<any>;
+    grocery$: Observable<Grocery>;
 
     constructor(private route: ActivatedRoute, public groceryService: GroceryService) { }
 

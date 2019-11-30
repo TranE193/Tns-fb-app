@@ -1,6 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from "nativescript-plugin-firebase";
+import { LoginType, User } from "nativescript-plugin-firebase";
 import { from, Observable } from "rxjs";
+import { Grocery } from "~/app/shared/models/grocery";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +11,14 @@ export class FirebaseService {
     constructor(private ngZone: NgZone) { }
 
     initFirebase() {
-        firebase.init().then(() => console.log("firebase.init done"),
+        firebase.init({
+            onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when they re-visit your app
+                console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
+                if(data.loggedIn) {
+                    console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+                }
+            }
+        }).then((data) => console.log("firebase.init done", data),
             (error) => console.log("firebase.init error: " + error));
     }
 
@@ -70,7 +79,7 @@ export class FirebaseService {
     //     return result;
     // };
 
-    getObservableList(url: string, handleSnapshot): Observable<any> {
+    getObservableList(url: string, handleSnapshot): Observable<Grocery[]> {
         return new Observable((observer: any) => {
             let onValueEvent = (snapshot: any) => {
                 this.ngZone.run(() => {
@@ -98,7 +107,61 @@ export class FirebaseService {
         });
     }
 
-    getItem(url: string, id: string): Observable<any> {
+    getItem(url: string, id: string): Observable<Grocery> {
         return from(firebase.getValue(`/${url}/${id}`).then(res => ({id, ...res.value})))
+    }
+
+    // AUTH
+    createUser(email: string, password: string) {
+        firebase.createUser({
+            email: email,
+            password: password
+        })
+        .then(
+            (user) => {
+                console.log({
+                        title: "User created",
+                        message: "uid: " + user,
+                        okButtonText: "Nice!"
+                    }
+                )
+            },
+            (errorMessage) => {
+                console.log({
+                    title: "No user created",
+                    message: errorMessage,
+                    okButtonText: "OK, got it"
+                })
+            }
+        )
+    }
+
+    getCurrentUser(): Observable<any> {
+        // return from(firebase.getCurrentUser(`/${url}/${id}`).then(res => ({id, ...res.value})))
+        return from(firebase.getCurrentUser()
+        .then((user: User) => user,
+            error => console.log("getCurrentUser error: " + JSON.stringify(error))))
+    }
+
+    login(email: string, password: string): Observable<any> {
+        return from(firebase.login({
+            passwordOptions: {
+                email: email,
+                password: password
+            },
+            type: LoginType.PASSWORD,
+        }).then(
+            (user: User) => {
+                console.log("Login success: " + JSON.stringify(user));
+                return user;
+            },
+            (error) => console.log("Login error: " + JSON.stringify(error))
+        ))
+    }
+
+    logout() {
+        firebase.logout()
+        .then(() => console.log("Logout OK"))
+        .catch(error => console.log("Logout error: " + JSON.stringify(error)));
     }
 }

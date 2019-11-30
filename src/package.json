@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^8.3.18",
-    "@nativescript/schematics": "^0.7.3"
+    "@nativescript/schematics": "^0.7.3",
+    "@types/jest": "^24.0.23"
   }
 }

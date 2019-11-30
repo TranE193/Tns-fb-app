@@ -8,5 +8,9 @@
 
     <StackLayout class="p-15" sdkExampleTitle sdkToggleNavButton>
         <Button class="btn btn-primary btn-active" text="Display Prompt Dialog" (tap)="displayPromptDialog()"></Button>
+        <Button class="btn btn-primary btn-active" text="create User" (tap)="createUser()"></Button>
+        <Button class="btn btn-primary btn-active" text="login" (tap)="login()"></Button>
+        <Button class="btn btn-primary btn-active" text="logout" (tap)="logout()"></Button>
+        <Label class="btn btn-primary btn-active" [text]="(user$ | async)?.email"></Label>
     </StackLayout>
 </GridLayout>
