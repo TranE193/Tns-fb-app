@@ -3,13 +3,19 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { LoginContainerComponent } from './containers/login-container/login-container.component';
 import { AuthRoutingModule } from "~/app/auth/auth-routing.module";
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './+state/auth.effects';
+import { StoreModule } from "@ngrx/store";
+import { authFeatureKey, authReducer, initialState as authInitialState } from "~/app/auth/+state/auth.reducer";
 
 
 @NgModule({
     declarations: [LoginComponent, LoginContainerComponent],
     imports: [
         NativeScriptCommonModule,
-        AuthRoutingModule
+        AuthRoutingModule,
+        StoreModule.forFeature(authFeatureKey, authReducer, {initialState: authInitialState}),
+        EffectsModule.forFeature([AuthEffects])
     ],
     schemas: [NO_ERRORS_SCHEMA]
 })

@@ -13,5 +13,13 @@
       "prefix": "ns"
     }
   },
+  "schematics": {
+    "@nativescript/schematics:component": {
+      "styleext": "scss"
+    },
+    "@ngrx/schematics:component": {
+      "styleext": "scss"
+    }
+  },
   "defaultProject": "tab-navigation"
 }
