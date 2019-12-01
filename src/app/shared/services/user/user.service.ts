@@ -18,11 +18,11 @@ export class UserService {
         return this.firebaseService.getCurrentUser();
     }
 
-    login(email: string, password: string): Observable<User> {
+    login({email, password}): Observable<User> {
         return this.firebaseService.login(email, password);
     }
 
-    logout() {
-        this.firebaseService.logout();
+    logout(): Observable<any> {
+        return this.firebaseService.logout();
     }
 }

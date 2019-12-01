@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FirebaseService } from "~/app/shared/services/firebase.service";
-import { Observable } from "rxjs";
-import { User } from "nativescript-plugin-firebase";
 
 @Component({
     selector: "ns-app",
@@ -9,7 +7,7 @@ import { User } from "nativescript-plugin-firebase";
     styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-    currentUser$: Observable<User>;
+    // create new user actions (getCurrent + login and save to state)
 
     constructor(private fs: FirebaseService) {
         fs.initFirebase();

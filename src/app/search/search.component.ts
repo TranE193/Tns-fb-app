@@ -3,6 +3,10 @@ import { capitalizationType, inputType, prompt, PromptOptions, PromptResult } fr
 import { UserService } from "~/app/shared/services/user/user.service";
 import { Observable } from "rxjs";
 import { User } from "nativescript-plugin-firebase";
+import { select, Store } from "@ngrx/store";
+import { RootPartialState } from "~/app/+state/root.reducer";
+import { rootQuery } from "~/app/+state/root.selectors";
+import { Login, Logout } from "~/app/+state/root.actions";
 
 
 @Component({
@@ -15,11 +19,11 @@ export class SearchComponent implements OnInit {
     user$: Observable<User>;
 
 
-    constructor(public userService: UserService) {
-        // Use the constructor to inject services.
-    }
+    constructor(public userService: UserService, private store: Store<RootPartialState>) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.user$ = this.store.pipe(select(rootQuery.getCurrentUser));
+    }
 
     displayPromptDialog() {
         let options: PromptOptions = {
@@ -45,11 +49,10 @@ export class SearchComponent implements OnInit {
     }
 
     login() {
-        console.log('login');
-        this.user$ = this.userService.login(this.email, this.password)
+        this.store.dispatch(new Login({email: this.email, password: this.password}));
     }
 
     logout() {
-        this.userService.logout();
+        this.store.dispatch(new Logout());
     }
 }

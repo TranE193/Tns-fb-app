@@ -8,6 +8,7 @@ import { environment } from '~/environments/environment';
 import { EffectsModule } from "@ngrx/effects";
 import { RootEffects } from "~/app/+state/root.effects";
 import { initialState as rootInitialState, rootReducer } from "~/app/+state/root.reducer";
+import { RootResolver } from "~/app/+state/resolvers/root.resolver";
 
 @NgModule({
     bootstrap: [
@@ -16,8 +17,8 @@ import { initialState as rootInitialState, rootReducer } from "~/app/+state/root
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        StoreModule.forRoot(rootReducer, {
-            initialState: rootInitialState,
+        StoreModule.forRoot({root: rootReducer}, {
+            initialState: {root: rootInitialState},
             runtimeChecks: {
                 strictStateImmutability: true,
                 strictActionImmutability: true,
@@ -26,6 +27,7 @@ import { initialState as rootInitialState, rootReducer } from "~/app/+state/root
         EffectsModule.forRoot([RootEffects]),
         !environment.production ? StoreDevtoolsModule.instrument() : []
     ],
+    providers: [RootResolver],
     declarations: [
         AppComponent
     ],

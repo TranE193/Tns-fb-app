@@ -159,9 +159,9 @@ export class FirebaseService {
         ))
     }
 
-    logout() {
-        firebase.logout()
+    logout(): Observable<any> {
+        return from(firebase.logout()
         .then(() => console.log("Logout OK"))
-        .catch(error => console.log("Logout error: " + JSON.stringify(error)));
+        .catch(error => console.log("Logout error: " + JSON.stringify(error))));
     }
 }

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NSEmptyOutletComponent } from "nativescript-angular";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { RootResolver } from "~/app/+state/resolvers/root.resolver";
 
 const routes: Routes = [
     {
@@ -13,13 +14,15 @@ const routes: Routes = [
         path: "groceries",
         component: NSEmptyOutletComponent,
         loadChildren: () => import("~/app/grocery/grocery.module").then((m) => m.GroceryModule),
-        outlet: "groceryTab"
+        outlet: "groceryTab",
+        resolve: {root: RootResolver}
     },
     {
         path: "search",
         component: NSEmptyOutletComponent,
         loadChildren: () => import("~/app/search/search.module").then((m) => m.SearchModule),
-        outlet: "searchTab"
+        outlet: "searchTab",
+        // resolve: {root: RootResolver} todo: seems to lazy load isn`t working :(
     }
 ];
 

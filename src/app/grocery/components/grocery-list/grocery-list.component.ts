@@ -1,11 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Grocery } from "~/app/shared/models/grocery";
 import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
 import { RadListViewComponent } from "nativescript-ui-listview/angular";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
 import { TextField } from "tns-core-modules/ui/text-field";
-import { UserService } from "~/app/shared/services/user/user.service";
 import { User } from "nativescript-plugin-firebase";
 
 @Component({
@@ -18,9 +17,10 @@ export class GroceryListComponent implements OnInit {
 
     @Input() groceries: Grocery[];
     @Input() currentUser: User;
+    @Output() logout = new EventEmitter();
     @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
 
-    constructor(private groceryService: GroceryService, private userService: UserService) { }
+    constructor(private groceryService: GroceryService) { }
 
     ngOnInit(): void {}
 
@@ -55,7 +55,7 @@ export class GroceryListComponent implements OnInit {
         return '';
     }
 
-    logout() {
-        this.userService.logout();
+    onLogout() {
+        this.logout.emit();
     }
 }
