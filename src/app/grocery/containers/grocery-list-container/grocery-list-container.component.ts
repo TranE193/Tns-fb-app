@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
-import { Observable } from "rxjs";
-import { User } from "nativescript-plugin-firebase";
-import { Grocery } from "~/app/shared/models/grocery";
-import { UserService } from "~/app/shared/services/user/user.service";
-import { select, Store } from "@ngrx/store";
-import { rootQuery } from "~/app/+state/root.selectors";
-import { RootPartialState } from "~/app/+state/root.reducer";
-import { Logout } from "~/app/+state/root.actions";
+import { GroceryService } from '~/app/shared/services/grocery/grocery.service';
+import { Observable } from 'rxjs';
+import { User } from 'nativescript-plugin-firebase';
+import { Grocery } from '~/app/shared/models/grocery';
+import { UserService } from '~/app/shared/services/user/user.service';
+import { select, Store } from '@ngrx/store';
+import { rootQuery } from '~/app/+state/root.selectors';
+import { RootPartialState } from '~/app/+state/root.reducer';
+import { Logout } from '~/app/+state/root.actions';
 
 @Component({
     selector: 'ns-grocery-list-container',

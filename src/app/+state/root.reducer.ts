@@ -1,5 +1,5 @@
 import { RootAction, RootActionTypes } from './root.actions';
-import { User } from "nativescript-plugin-firebase";
+import { User } from 'nativescript-plugin-firebase';
 
 export const rootFeatureKey = 'root';
 
@@ -9,8 +9,7 @@ export interface RootState {
 }
 
 export const initialState: RootState = {
-    currentUser: null,
-    loaded: false
+    currentUser: null, loaded: false
 };
 
 export interface RootPartialState {
@@ -22,37 +21,31 @@ export function rootReducer(state: RootState = initialState, action: RootAction)
 
         case RootActionTypes.LoadCurrentUser:
             state = {
-                ...state,
-                loaded: false
+                ...state, loaded: false
             };
             break;
 
         case RootActionTypes.LoadCurrentUserSuccess:
             state = {
-                ...state,
-                currentUser: action.payload,
-                loaded: true
+                ...state, currentUser: action.payload, loaded: true
             };
             break;
 
         case RootActionTypes.LoadCurrentUserFailure:
             state = {
-                ...state,
-                loaded: true
+                ...state, loaded: true
             };
             break;
 
         case RootActionTypes.LoginSuccess:
             state = {
-                ...state,
-                currentUser: action.payload
+                ...state, currentUser: action.payload
             };
             break;
 
         case RootActionTypes.LogoutSuccess:
             state = {
-                ...state,
-                currentUser: null
+                ...state, currentUser: null
             };
             break;
     }

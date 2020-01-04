@@ -8,16 +8,8 @@ import { AuthActions, AuthActionTypes, LoadAuthsFailure, LoadAuthsSuccess } from
 @Injectable()
 export class AuthEffects {
 
-    @Effect()
-    loadAuths$ = this.actions$.pipe(
-        ofType(AuthActionTypes.LoadAuths),
-        concatMap(() =>
-            /** An EMPTY observable only emits completion. Replace with your own observable API request */
-            EMPTY.pipe(
-                map(data => new LoadAuthsSuccess({data})),
-                catchError(error => of(new LoadAuthsFailure({error}))))
-        )
-    );
+    @Effect() loadAuths$ = this.actions$.pipe(ofType(AuthActionTypes.LoadAuths), concatMap(() => /** An EMPTY observable only emits completion. Replace with your own observable API request */
+        EMPTY.pipe(map(data => new LoadAuthsSuccess({ data })), catchError(error => of(new LoadAuthsFailure({ error }))))));
 
 
     constructor(private actions$: Actions<AuthActions>) {}

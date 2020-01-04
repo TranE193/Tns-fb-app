@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Grocery } from "~/app/shared/models/grocery";
-import { GroceryService } from "~/app/shared/services/grocery/grocery.service";
-import { RadListViewComponent } from "nativescript-ui-listview/angular";
-import { ListViewEventData } from "nativescript-ui-listview";
-import { View } from "tns-core-modules/ui/core/view";
-import { TextField } from "tns-core-modules/ui/text-field";
-import { User } from "nativescript-plugin-firebase";
+import { Grocery } from '~/app/shared/models/grocery';
+import { GroceryService } from '~/app/shared/services/grocery/grocery.service';
+import { RadListViewComponent } from 'nativescript-ui-listview/angular';
+import { ListViewEventData } from 'nativescript-ui-listview';
+import { View } from 'tns-core-modules/ui/core/view';
+import { TextField } from 'tns-core-modules/ui/text-field';
+import { User } from 'nativescript-plugin-firebase';
 
 @Component({
     selector: 'ns-grocery-list',
@@ -18,18 +18,18 @@ export class GroceryListComponent implements OnInit {
     @Input() groceries: Grocery[];
     @Input() currentUser: User;
     @Output() logout = new EventEmitter();
-    @ViewChild("myListView", {read: RadListViewComponent, static: false}) myListViewComponent: RadListViewComponent;
+    @ViewChild('myListView', { read: RadListViewComponent, static: false }) myListViewComponent: RadListViewComponent;
 
     constructor(private groceryService: GroceryService) { }
 
-    ngOnInit(): void {}
+    ngOnInit() { }
 
-    filtering(item: Grocery): boolean { return !!item};
+    filtering(item: Grocery): boolean { return !!item;};
 
     onSwipeCellStarted(args: ListViewEventData) {
         const swipeLimits = args.data.swipeLimits;
         const swipeView = args.object;
-        const rightItem = swipeView.getViewById<View>("delete-view");
+        const rightItem = swipeView.getViewById<View>('delete-view');
         swipeLimits.right = rightItem.getMeasuredWidth();
         swipeLimits.left = 0;
         swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;

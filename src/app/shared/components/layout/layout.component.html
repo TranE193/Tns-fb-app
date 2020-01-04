@@ -1,0 +1,20 @@
+<BottomNavigation>
+    <TabStrip>
+        <TabStripItem>
+            <Label text="Продукты"></Label>
+            <Image class="fa t-36" src="font://&#xf07a;"></Image>
+        </TabStripItem>
+        <TabStripItem>
+            <Label text="Search"></Label>
+            <Image class="fa t-36" src="font://&#xf002;"></Image>
+        </TabStripItem>
+    </TabStrip>
+
+    <TabContentItem>
+        <page-router-outlet name="groceryOutlet"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="searchTab"></page-router-outlet>
+    </TabContentItem>
+</BottomNavigation>

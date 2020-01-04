@@ -1,1 +1,13 @@
-<ns-login></ns-login>
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Login"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <Label class="page-icon fa" text="&#xf002;"></Label>
+    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
+
+    <StackLayout class="p-15" sdkExampleTitle sdkToggleNavButton>
+        <Button class="btn btn-primary btn-active" text="login" (tap)="login()"></Button>
+        <Label class="btn btn-primary btn-active" [text]="(user$ | async)?.email"></Label>
+    </StackLayout>
+</GridLayout>

@@ -1,18 +1,12 @@
 import { Action } from '@ngrx/store';
-import { User } from "nativescript-plugin-firebase";
+import { User } from 'nativescript-plugin-firebase';
 
 export enum RootActionTypes {
-    LoadCurrentUser = '[Root] LoadCurrentUser',
-    LoadCurrentUserSuccess = '[Root] LoadCurrentUserSuccess',
-    LoadCurrentUserFailure = '[Root] LoadCurrentUserFailure',
+    LoadCurrentUser = '[Root] LoadCurrentUser', LoadCurrentUserSuccess = '[Root] LoadCurrentUserSuccess', LoadCurrentUserFailure = '[Root] LoadCurrentUserFailure',
 
-    Login = '[Root] Login',
-    LoginSuccess = '[Root] LoginSuccess',
-    LoginFailure = '[Root] LoginFailure',
+    Login = '[Root] Login', LoginSuccess = '[Root] LoginSuccess', LoginFailure = '[Root] LoginFailure',
 
-    Logout = '[Root] Logout',
-    LogoutSuccess = '[Root] LogoutSuccess',
-    LogoutFailure = '[Root] LogoutFailure',
+    Logout = '[Root] Logout', LogoutSuccess = '[Root] LogoutSuccess', LogoutFailure = '[Root] LogoutFailure',
 }
 
 export class LoadCurrentUser implements Action {

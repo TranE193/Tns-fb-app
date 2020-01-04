@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
-import { FirebaseService } from "~/app/shared/services/firebase.service";
-import { Grocery } from "~/app/shared/models/grocery";
-import { Observable } from "rxjs";
+import { FirebaseService } from '~/app/shared/services/firebase.service';
+import { Grocery } from '~/app/shared/models/grocery';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -16,11 +16,9 @@ export class GroceryService {
     }
 
     handleSnapshot(data: any) {
-        return data
-            ? Object.keys(data)
-            .map(key => ({...{id: key}, ...data[key]}))
-            .sort((a: Grocery, b: Grocery) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
-            : [];
+        return data ? Object.keys(data)
+        .map(key => ({ ...{ id: key }, ...data[key] }))
+        .sort((a: Grocery, b: Grocery) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) : [];
     }
 
     create(item) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FirebaseService } from "~/app/shared/services/firebase.service";
-import { Observable } from "rxjs";
-import { User } from "nativescript-plugin-firebase";
+import { FirebaseService } from '~/app/shared/services/firebase.service';
+import { Observable } from 'rxjs';
+import { User } from 'nativescript-plugin-firebase';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class UserService {
         return this.firebaseService.getCurrentUser();
     }
 
-    login({email, password}): Observable<User> {
+    login({ email, password }): Observable<User> {
         return this.firebaseService.login(email, password);
     }
 

@@ -1,9 +1,7 @@
 import { Action } from '@ngrx/store';
 
 export enum AuthActionTypes {
-    LoadAuths = '[Auth] Load Auths',
-    LoadAuthsSuccess = '[Auth] Load Auths Success',
-    LoadAuthsFailure = '[Auth] Load Auths Failure',
+    LoadAuths = '[Auth] Load Auths', LoadAuthsSuccess = '[Auth] Load Auths Success', LoadAuthsFailure = '[Auth] Load Auths Failure',
 }
 
 export class LoadAuths implements Action {

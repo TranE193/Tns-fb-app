@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RouterExtensions } from "nativescript-angular";
-import { TextField } from "tns-core-modules/ui/text-field";
-import { Grocery } from "~/app/shared/models/grocery";
+import { RouterExtensions } from 'nativescript-angular';
+import { TextField } from 'tns-core-modules/ui/text-field';
+import { Grocery } from '~/app/shared/models/grocery';
 
 interface GroceryForm {
     name: string,
@@ -9,14 +9,11 @@ interface GroceryForm {
 }
 
 @Component({
-    selector: 'ns-grocery',
-    templateUrl: './grocery.component.html',
-    styleUrls: ['./grocery.component.scss']
+    selector: 'ns-grocery', templateUrl: './grocery.component.html', styleUrls: ['./grocery.component.scss']
 })
 export class GroceryComponent implements OnInit {
     groceryForm: GroceryForm = {
-        name: '',
-        amount: '1'
+        name: '', amount: '1'
     };
 
     @Input() grocery: Grocery;
@@ -46,8 +43,7 @@ export class GroceryComponent implements OnInit {
             id: this.grocery ? this.grocery.id : null,
             name: this.groceryForm.name,
             amount: parseInt(this.groceryForm.amount) || 1,
-            createdAt: this.grocery ? this.grocery.createdAt : date.toUTCString(),
-            updatedAt: date.toUTCString(),
+            createdAt: this.grocery ? this.grocery.createdAt : date.toUTCString(), updatedAt: date.toUTCString()
         });
 
         this.onBackTap();
