@@ -4,7 +4,8 @@
 </ActionBar>
 
 <GridLayout rows="auto, auto, auto">
-    <TextField row="0"
+    <TextField #nameTextField
+               row="0"
                hint="Продукт"
                class="input input-border text-input"
                [text]="grocery ? grocery.name : groceryForm.name"

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { Grocery } from '~/app/shared/models/grocery';
@@ -11,17 +11,26 @@ interface GroceryForm {
 @Component({
     selector: 'ns-grocery', templateUrl: './grocery.component.html', styleUrls: ['./grocery.component.scss']
 })
-export class GroceryComponent implements OnInit {
+export class GroceryComponent implements OnInit, AfterViewInit {
     groceryForm: GroceryForm = {
         name: '', amount: '1'
     };
 
+
     @Input() grocery: Grocery;
     @Output() upsertGrocery = new EventEmitter();
+    @ViewChild('nameTextField', { static: false }) nameTextField: ElementRef;
 
     constructor(private routerExtensions: RouterExtensions) { }
 
     ngOnInit() { }
+
+    ngAfterViewInit(): void {
+        // the best nativescript workaround :(
+        setTimeout(() => {
+            this.nameTextField.nativeElement.focus();
+        }, 400);
+    }
 
     onBackTap(): void {
         this.routerExtensions.back();
@@ -43,7 +52,8 @@ export class GroceryComponent implements OnInit {
             id: this.grocery ? this.grocery.id : null,
             name: this.groceryForm.name,
             amount: parseInt(this.groceryForm.amount) || 1,
-            createdAt: this.grocery ? this.grocery.createdAt : date.toUTCString(), updatedAt: date.toUTCString()
+            createdAt: this.grocery ? this.grocery.createdAt : date.toUTCString(),
+            updatedAt: date.toUTCString()
         });
 
         this.onBackTap();
