@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from '~/app/+state/root.actions';
+import { CreateUser, Login } from '~/app/+state/root.actions';
 import { select, Store } from '@ngrx/store';
 import { RootPartialState } from '~/app/+state/root.reducer';
 import { Observable } from 'rxjs';
@@ -14,15 +14,19 @@ import { rootQuery } from '~/app/+state/root.selectors';
 export class LoginContainerComponent implements OnInit {
     email = 'ddseliverstov@gmail.com';
     password = 'TranE193';
-    user$: Observable<User>;
+    currentUser$: Observable<User>;
 
     constructor(private store: Store<RootPartialState>) {
-        this.user$ = this.store.pipe(select(rootQuery.getCurrentUser));
+        this.currentUser$ = this.store.pipe(select(rootQuery.getCurrentUser));
     }
 
     ngOnInit() { }
 
-    login() {
-        this.store.dispatch(new Login({ email: this.email, password: this.password }));
+    onLogin(payload) {
+        this.store.dispatch(new Login(payload));
+    }
+
+    onRegister(payload) {
+        this.store.dispatch(new CreateUser(payload));
     }
 }

@@ -3,6 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
+    CreateUser, CreateUserFailure, CreateUserSuccess,
     LoadCurrentUserFailure,
     LoadCurrentUserSuccess,
     Login,
@@ -30,6 +31,11 @@ export class RootEffects {
     .pipe(map((payload: User) => new LoginSuccess(payload)), catchError(error => of(new LoginFailure(error))))));
 
     @Effect({ dispatch: false }) loginSuccess$ = this.actions$.pipe(ofType(RootActionTypes.LoginSuccess), tap(() => this.router.navigate(['/'])));
+
+    @Effect() createUser$ = this.actions$.pipe(ofType(RootActionTypes.CreateUser), concatMap((action: CreateUser) => this.userService.createUser(action.payload)
+    .pipe(map((payload: User) => new CreateUserSuccess(payload)), catchError(error => of(new CreateUserFailure(error))))));
+
+    @Effect({ dispatch: false }) createUserSuccess$ = this.actions$.pipe(ofType(RootActionTypes.CreateUserSuccess), tap(() => this.router.navigate(['/'])));
 
     @Effect() logout$ = this.actions$.pipe(ofType(RootActionTypes.Logout), concatMap(() => this.userService.logout()
     .pipe(map(() => new LogoutSuccess()), catchError(error => of(new LogoutFailure(error))))));

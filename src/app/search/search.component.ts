@@ -6,15 +6,12 @@ import { User } from 'nativescript-plugin-firebase';
 import { select, Store } from '@ngrx/store';
 import { RootPartialState } from '~/app/+state/root.reducer';
 import { rootQuery } from '~/app/+state/root.selectors';
-import { Login, Logout } from '~/app/+state/root.actions';
 
 
 @Component({
     selector: 'Search', templateUrl: './search.component.html'
 })
 export class SearchComponent implements OnInit {
-    email = 'ddseliverstov@gmail.com';
-    password = 'TranE193';
     user$: Observable<User>;
 
 
@@ -36,18 +33,5 @@ export class SearchComponent implements OnInit {
         prompt(options).then((result: PromptResult) => {
             console.log('Hello, ' + result.text);
         });
-    }
-
-    createUser() {
-        console.log('createUser');
-        this.userService.createUser(this.email, this.password);
-    }
-
-    login() {
-        this.store.dispatch(new Login({ email: this.email, password: this.password }));
-    }
-
-    logout() {
-        this.store.dispatch(new Logout());
     }
 }

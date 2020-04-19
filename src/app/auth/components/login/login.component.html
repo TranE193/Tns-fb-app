@@ -1,1 +1,34 @@
-<Button class="btn btn-primary" text="login works!"></Button>
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Login"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <StackLayout class="layout" verticalAlignment="center" width="80%">
+        <TextField
+                hint="Email"
+                class="input input-border text-input"
+                [text]="loginForm.email"
+                (textChange)="onTextEmailChange($event)"
+        ></TextField>
+        <TextField
+                hint="Password"
+                secure="true"
+                class="input input-border text-input"
+                [text]="loginForm.password"
+                (textChange)="onTextPasswordChange($event)"
+        ></TextField>
+        <TextField
+                *ngIf="isRegisterMode"
+                hint="Confirm password"
+                secure="true"
+                class="input input-border text-input"
+                [text]="loginForm.confirmPassword"
+                (textChange)="onTextConfirmPasswordChange($event)"
+        ></TextField>
+
+        <Button class="btn btn-primary" [text]="isRegisterMode ? 'sign up' : 'login'" (tap)="onLogin()"></Button>
+        <Button class="btn" [text]="isRegisterMode ? 'back' : 'register'"
+                (tap)="isRegisterMode = !isRegisterMode"></Button>
+    </StackLayout>
+
+</GridLayout>

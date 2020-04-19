@@ -1,1 +1,15 @@
-/* Add mobile styles for the component here.  */
+GridLayout {
+  background: url("~/images/background.png") center no-repeat;
+  background-size: contain;
+}
+
+.layout {
+  background: #fff;
+  opacity: 0.85%;
+  border-radius: 20%;
+}
+
+.input {
+  font-size: 20pt;
+  margin: 10pt 15pt;
+}

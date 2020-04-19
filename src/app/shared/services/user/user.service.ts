@@ -10,8 +10,8 @@ export class UserService {
 
     constructor(private firebaseService: FirebaseService) { }
 
-    createUser(email: string, password: string) {
-        this.firebaseService.createUser(email, password);
+    createUser({ email, password }): Observable<User> {
+        return this.firebaseService.createUser(email, password);
     }
 
     getCurrentUser(): Observable<User> {

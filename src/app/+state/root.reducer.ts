@@ -43,6 +43,12 @@ export function rootReducer(state: RootState = initialState, action: RootAction)
             };
             break;
 
+        case RootActionTypes.CreateUserSuccess:
+            state = {
+                ...state, currentUser: action.payload
+            };
+            break;
+
         case RootActionTypes.LogoutSuccess:
             state = {
                 ...state, currentUser: null

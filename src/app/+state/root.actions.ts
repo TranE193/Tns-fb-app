@@ -4,7 +4,7 @@ import { User } from 'nativescript-plugin-firebase';
 export enum RootActionTypes {
     LoadCurrentUser = '[Root] LoadCurrentUser', LoadCurrentUserSuccess = '[Root] LoadCurrentUserSuccess', LoadCurrentUserFailure = '[Root] LoadCurrentUserFailure',
 
-    Login = '[Root] Login', LoginSuccess = '[Root] LoginSuccess', LoginFailure = '[Root] LoginFailure',
+    Login = '[Root] Login', LoginSuccess = '[Root] LoginSuccess', LoginFailure = '[Root] LoginFailure', CreateUser = '[Root] CreateUser', CreateUserSuccess = '[Root] CreateUserSuccess', CreateUserFailure = '[Root] CreateUserFailure',
 
     Logout = '[Root] Logout', LogoutSuccess = '[Root] LogoutSuccess', LogoutFailure = '[Root] LogoutFailure',
 }
@@ -43,6 +43,24 @@ export class LoginFailure implements Action {
     constructor(public payload: string) { }
 }
 
+export class CreateUser implements Action {
+    readonly type = RootActionTypes.CreateUser;
+
+    constructor(public payload: { email: string, password: string }) { }
+}
+
+export class CreateUserSuccess implements Action {
+    readonly type = RootActionTypes.CreateUserSuccess;
+
+    constructor(public payload: User) { }
+}
+
+export class CreateUserFailure implements Action {
+    readonly type = RootActionTypes.CreateUserFailure;
+
+    constructor(public payload: string) { }
+}
+
 export class Logout implements Action {
     readonly type = RootActionTypes.Logout;
 }
@@ -64,6 +82,9 @@ export type RootAction =
     | Login
     | LoginSuccess
     | LoginFailure
+    | CreateUser
+    | CreateUserSuccess
+    | CreateUserFailure
     | Logout
     | LogoutSuccess
     | LogoutFailure;
