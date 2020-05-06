@@ -6,20 +6,6 @@
   font-size: 32pt;
 }
 
-.btn {
-  background-color: #ddd;
-  color: #333;
-  font-size: 20pt;
-  border-radius: 15%;
-}
-
-.btn-primary {
-  background-color: $primary-color;
-  color: white;
-  font-size: 20pt;
-  border-radius: 15%;
-}
-
 // Common page class
 .page-content {
   .page-placeholder {
@@ -41,4 +27,23 @@
 //Action bar
 ActionBar .action-bar-title {
   horizontal-align: center;
+}
+
+.button {
+  background-color: #ddd;
+  color: #333;
+  font-size: 14pt;
+  border-radius: 10%;
+  margin: 6pt;
+  padding: 8pt;
+}
+
+.button-primary {
+  background-color: #8e24ff;
+  color: white;
+}
+
+.button-warn {
+  background-color: red;
+  color: white;
 }

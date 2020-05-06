@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Grocery } from '~/app/shared/models/grocery';
-import { GroceryService } from '~/app/shared/services/grocery/grocery.service';
 import { RadListViewComponent } from 'nativescript-ui-listview/angular';
-import { ListViewEventData } from 'nativescript-ui-listview';
+import { ListViewEventData, RadListView } from 'nativescript-ui-listview';
 import { View } from 'tns-core-modules/ui/core/view';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { User } from 'nativescript-plugin-firebase';
@@ -12,17 +11,17 @@ import { User } from 'nativescript-plugin-firebase';
     templateUrl: './grocery-list.component.html',
     styleUrls: ['./grocery-list.component.scss']
 })
-export class GroceryListComponent implements OnInit {
+export class GroceryListComponent {
     filter: string = '';
+    isSelectionMode: boolean;
+    isAllSelected: boolean;
 
     @Input() groceries: Grocery[];
     @Input() currentUser: User;
     @Output() logout = new EventEmitter();
+    @Output() removeGrocery = new EventEmitter();
+    @Output() removeSelectedGroceries = new EventEmitter();
     @ViewChild('myListView', { read: RadListViewComponent, static: false }) myListViewComponent: RadListViewComponent;
-
-    constructor(private groceryService: GroceryService) { }
-
-    ngOnInit() { }
 
     filtering(item: Grocery): boolean { return !!item;};
 
@@ -37,7 +36,7 @@ export class GroceryListComponent implements OnInit {
 
     onRightSwipeClick(args: ListViewEventData) {
         const item = args.object.bindingContext;
-        this.groceryService.remove(item.id);
+        this.removeGrocery.emit(item.id);
     }
 
     onFilterChange(args) {
@@ -47,15 +46,42 @@ export class GroceryListComponent implements OnInit {
         };
     }
 
-    getUpdatedDateView(item): string {
-        if(item.updatedAt) {
-            const date: Date = new Date(item.updatedAt);
-            return date.toLocaleString().substr(4, 20);
-        }
-        return '';
+    getUpdateDateView(item): string {
+        const date: Date = new Date(item.updatedAt);
+        return date.toLocaleString().substr(4, 20);
     }
 
     onLogout() {
         this.logout.emit();
+    }
+
+    public onItemSelected(args: ListViewEventData) {
+        this.isSelectionMode = true;
+
+        const listView = args.object as RadListView;
+        const selectedGroceries = listView.getSelectedItems() as Grocery[];
+        this.isAllSelected = selectedGroceries.length === this.groceries.length;
+    }
+
+    onItemDeselected(args: ListViewEventData) {
+        const listView = args.object as RadListView;
+        const selectedGroceries = listView.getSelectedItems() as Grocery[];
+        this.isAllSelected = selectedGroceries.length === this.groceries.length;
+    }
+
+    onSelectAll() {
+        !this.isAllSelected ? this.myListViewComponent.listView.selectAll() :
+            this.myListViewComponent.listView.deselectAll();
+    }
+
+    onCloseSelectMenu() {
+        this.myListViewComponent.listView.deselectAll();
+        this.isSelectionMode = false;
+    }
+
+    onDeleteSelected() {
+        const selectedGroceries = this.myListViewComponent.listView.getSelectedItems() as Grocery[];
+        this.removeSelectedGroceries.emit(selectedGroceries.map(g => g.id));
+        this.isSelectionMode = false;
     }
 }

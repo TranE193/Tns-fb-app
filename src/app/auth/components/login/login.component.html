@@ -26,8 +26,9 @@
                 (textChange)="onTextConfirmPasswordChange($event)"
         ></TextField>
 
-        <Button class="btn btn-primary" [text]="isRegisterMode ? 'sign up' : 'login'" (tap)="onLogin()"></Button>
-        <Button class="btn" [text]="isRegisterMode ? 'back' : 'register'"
+        <Button class="button button-primary button-auth" [text]="isRegisterMode ? 'sign up' : 'login'"
+                (tap)="onLogin()"></Button>
+        <Button class="button button-auth" [text]="isRegisterMode ? 'back' : 'register'"
                 (tap)="isRegisterMode = !isRegisterMode"></Button>
     </StackLayout>
 

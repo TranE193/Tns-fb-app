@@ -1,28 +1,41 @@
 <ActionBar class="action-bar">
     <GridLayout columns="*, auto">
         <Label class="action-bar-title" column="0" text="Продукты"></Label>
-        <Button (tap)="onLogout()" *ngIf="currentUser" column="1" text="Выйти"></Button>
+        <Button *ngIf="currentUser" column="1" class="button" text="Выйти" (tap)="onLogout()"></Button>
     </GridLayout>
 </ActionBar>
 
-<GridLayout rows="auto, *" class="page page-content">
+<GridLayout rows="auto, auto, *" class="page page-content">
     <GridLayout row="0" columns="*, auto">
-        <TextField column="0" [text]="filter" (textChange)="onFilterChange($event)" hint="Найти"
+        <TextField column="0" [text]="filter" (textChange)="onFilterChange($event)" hint="Найти продукт"
                    class="input input-border text-input"></TextField>
-        <Button column="1" text="Добавить" [nsRouterLink]="['new']" class="add-btn"></Button>
+        <Button column="1" text="Добавить" [nsRouterLink]="['new']" class="button button-primary"></Button>
+    </GridLayout>
+    <GridLayout *ngIf="isSelectionMode" class="select-menu animated-height" row="1" columns="auto, auto, *, auto">
+        <Button column="0" class="button button-select-all"
+                [text]="!isAllSelected ? 'Select all' : 'Unselect all'"
+                (tap)="onSelectAll()"></Button>
+        <Button column="1" class="button button-warn" text="Delete" (tap)="onDeleteSelected()"></Button>
+        <Button column="3" class="button" text="Close" (tap)="onCloseSelectMenu()"></Button>
     </GridLayout>
 
-    <RadListView row="1" swipeActions="true"
+    <RadListView row="2" swipeActions="true"
+                 #myListView
+                 [selectionBehavior]="isSelectionMode ? 'Press' : 'LongPress'"
+                 [multipleSelection]="true"
                  [items]="groceries"
                  [filteringFunction]="filtering"
-                 (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
+                 (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
+                 (itemSelected)="onItemSelected($event)"
+                 (itemDeselected)="onItemDeselected($event)"
+    >
         <ng-template tkListItemTemplate let-item="item">
-            <StackLayout [nsRouterLink]="[item?.id]" class="list-item list" orientation="vertical">
-                <GridLayout columns="*,auto">
-                    <Label col="0" class="list-item__label-name" textwrap="true" [text]="item.name"></Label>
-                    <Label col="1" class="list-item__label-amount" [text]="item.amount + ' шт'"></Label>
+            <StackLayout orientation="horizontal" class="list-item list" Spacing="20pt">
+                <GridLayout columns="*, *" rows="auto, auto">
+                    <Label row="0" col="0" class="list-item__label-name" textwrap="true" [text]="item.name"></Label>
+                    <Label row="0" col="1" class="list-item__label-amount" [text]="item.amount + ' шт'"></Label>
+                    <Label row="1" col="1" class="list-item__label-date" [text]="getUpdateDateView(item)"></Label>
                 </GridLayout>
-                <Label class="list-item__label-date" [text]="getUpdatedDateView(item)"></Label>
             </StackLayout>
         </ng-template>
 

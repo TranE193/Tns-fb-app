@@ -29,6 +29,10 @@ export class GroceryService {
         this.firebaseService.removeItem(this.path, id);
     }
 
+    removeMany(ids: string[]) {
+        this.firebaseService.removeManyItems(this.path, ids);
+    }
+
     update(id, item) {
         this.firebaseService.updateItem(this.path, id, item);
     }

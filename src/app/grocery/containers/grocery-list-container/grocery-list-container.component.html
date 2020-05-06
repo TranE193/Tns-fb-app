@@ -2,4 +2,6 @@
         (logout)="onLogout()"
         [currentUser]="currentUser$ | async"
         [groceries]="groceries$ | async"
+        (removeGrocery)="onRemoveGrocery($event)"
+        (removeSelectedGroceries)="onRemoveManyGroceries($event)"
 ></ns-grocery-list>

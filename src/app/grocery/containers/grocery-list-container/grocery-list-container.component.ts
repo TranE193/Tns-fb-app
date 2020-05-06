@@ -29,4 +29,12 @@ export class GroceryListContainerComponent implements OnInit {
     onLogout() {
         this.store.dispatch(new Logout());
     }
+
+    onRemoveGrocery(groceryId: string) {
+        this.groceryService.remove(groceryId);
+    }
+
+    onRemoveManyGroceries(groceryIds: string[]) {
+        this.groceryService.removeMany(groceryIds);
+    }
 }

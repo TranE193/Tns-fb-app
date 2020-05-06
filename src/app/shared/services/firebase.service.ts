@@ -57,6 +57,18 @@ export class FirebaseService {
         });
     }
 
+
+    removeManyItems(url: string, itemIds: string[]) {
+        // firebase api don`t have a better solution
+        itemIds.map((id: string) => {
+            firebase.remove(`/${url}/${id}`).then(() => {
+                console.log(`[*] Info : Your  ${id} data was removed by ${url} url!`);
+            }, (error) => {
+                console.log('[*] Error : While removing your data to Firebase, with error: ' + error);
+            });
+        });
+    }
+
     getItem(url: string, id: string): Observable<any> {
         return from(firebase.getValue(`/${url}/${id}`).then(res => ({ id, ...res.value })));
     }
