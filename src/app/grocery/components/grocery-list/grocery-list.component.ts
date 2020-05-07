@@ -5,6 +5,8 @@ import { ListViewEventData, RadListView } from 'nativescript-ui-listview';
 import { View } from 'tns-core-modules/ui/core/view';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { User } from 'nativescript-plugin-firebase';
+import { RouterExtensions } from 'nativescript-angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'ns-grocery-list',
@@ -22,6 +24,8 @@ export class GroceryListComponent {
     @Output() removeGrocery = new EventEmitter();
     @Output() removeSelectedGroceries = new EventEmitter();
     @ViewChild('myListView', { read: RadListViewComponent, static: false }) myListViewComponent: RadListViewComponent;
+
+    constructor(private router: RouterExtensions, private route: ActivatedRoute) {}
 
     filtering(item: Grocery): boolean { return !!item;};
 
@@ -83,5 +87,20 @@ export class GroceryListComponent {
         const selectedGroceries = this.myListViewComponent.listView.getSelectedItems() as Grocery[];
         this.removeSelectedGroceries.emit(selectedGroceries.map(g => g.id));
         this.isSelectionMode = false;
+    }
+
+    onLongPressItem(item: Grocery) {
+        this.myListViewComponent.listView.selectItemAt(this.groceries.indexOf(item));
+    }
+
+    onTapItem(item: Grocery) {
+        if(!this.isSelectionMode) {
+            this.router.navigateByUrl(this.router.router.createUrlTree([item.id], { relativeTo: this.route }));
+        } else {
+            const selectedGroceries = this.myListViewComponent.listView.getSelectedItems() as Grocery[];
+            selectedGroceries.find(g => g.id === item.id) ?
+                this.myListViewComponent.listView.deselectItemAt(this.groceries.indexOf(item)) :
+                this.myListViewComponent.listView.selectItemAt(this.groceries.indexOf(item));
+        }
     }
 }

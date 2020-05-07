@@ -3,7 +3,7 @@
     <Label [text]="grocery ? grocery.name : 'Новая покупка'" class="action-bar-title"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, auto, auto">
+<StackLayout class="p-20 grocery-page">
     <TextField #nameTextField
                row="0"
                hint="Продукт"
@@ -18,5 +18,5 @@
                [text]="grocery ? grocery.amount : groceryForm.amount"
                (textChange)="onTextAmountChange($event)"
     ></TextField>
-    <Button row="2" [text]="grocery ? 'Сохранить' : 'Создать'" (tap)="onButtonTap()" class="add-btn"></Button>
-</GridLayout>
+    <Button row="2" [text]="grocery ? 'Сохранить' : 'Создать'" (tap)="onButtonTap()" class="primary"></Button>
+</StackLayout>

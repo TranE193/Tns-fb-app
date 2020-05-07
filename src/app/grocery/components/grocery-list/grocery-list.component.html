@@ -1,7 +1,7 @@
 <ActionBar class="action-bar">
     <GridLayout columns="*, auto">
         <Label class="action-bar-title" column="0" text="Продукты"></Label>
-        <Button *ngIf="currentUser" column="1" class="button" text="Выйти" (tap)="onLogout()"></Button>
+        <Button *ngIf="currentUser" column="1" text="Выйти" (tap)="onLogout()"></Button>
     </GridLayout>
 </ActionBar>
 
@@ -9,14 +9,14 @@
     <GridLayout row="0" columns="*, auto">
         <TextField column="0" [text]="filter" (textChange)="onFilterChange($event)" hint="Найти продукт"
                    class="input input-border text-input"></TextField>
-        <Button column="1" text="Добавить" [nsRouterLink]="['new']" class="button button-primary"></Button>
+        <Button column="1" text="Добавить" [nsRouterLink]="['new']" class="primary"></Button>
     </GridLayout>
     <GridLayout *ngIf="isSelectionMode" class="select-menu animated-height" row="1" columns="auto, auto, *, auto">
-        <Button column="0" class="button button-select-all"
+        <Button column="0" class="primary-medium"
                 [text]="!isAllSelected ? 'Select all' : 'Unselect all'"
                 (tap)="onSelectAll()"></Button>
-        <Button column="1" class="button button-warn" text="Delete" (tap)="onDeleteSelected()"></Button>
-        <Button column="3" class="button" text="Close" (tap)="onCloseSelectMenu()"></Button>
+        <Button column="1" class="warn" text="Delete" (tap)="onDeleteSelected()"></Button>
+        <Button column="3" text="Close" (tap)="onCloseSelectMenu()"></Button>
     </GridLayout>
 
     <RadListView row="2" swipeActions="true"
@@ -31,7 +31,8 @@
     >
         <ng-template tkListItemTemplate let-item="item">
             <StackLayout orientation="horizontal" class="list-item list" Spacing="20pt">
-                <GridLayout columns="*, *" rows="auto, auto">
+                <GridLayout columns="*, *" rows="auto, auto" (tap)="onTapItem(item)"
+                            (longPress)="onLongPressItem(item)">
                     <Label row="0" col="0" class="list-item__label-name" textwrap="true" [text]="item.name"></Label>
                     <Label row="0" col="1" class="list-item__label-amount" [text]="item.amount + ' шт'"></Label>
                     <Label row="1" col="1" class="list-item__label-date" [text]="getUpdateDateView(item)"></Label>

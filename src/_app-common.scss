@@ -29,7 +29,7 @@ ActionBar .action-bar-title {
   horizontal-align: center;
 }
 
-.button {
+Button {
   background-color: #ddd;
   color: #333;
   font-size: 14pt;
@@ -38,12 +38,33 @@ ActionBar .action-bar-title {
   padding: 8pt;
 }
 
-.button-primary {
-  background-color: #8e24ff;
+Button.primary {
+  background-color: $primary-color;
   color: white;
 }
 
-.button-warn {
-  background-color: red;
+Button.primary-medium {
+  background-color: $primary-color-medium;
+  color: white;
+}
+
+Button.primary-light {
+  background-color: $primary-color-light;
+  color: white;
+}
+
+
+Button.secondary {
+  background-color: $secondary-color;
+  color: white;
+}
+
+Button.warn {
+  background-color: $warn-color;
+  color: white;
+}
+
+Button.warn-light {
+  background-color: $warn-color-light;
   color: white;
 }

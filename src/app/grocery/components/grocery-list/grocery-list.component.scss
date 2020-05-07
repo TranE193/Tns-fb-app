@@ -1,3 +1,5 @@
+@import '../../../app.component';
+
 .text-input {
   color: white;
   font-size: 18pt;
@@ -10,14 +12,9 @@
   font-size: 18pt;
 }
 
-.button-select-all {
-  background-color: mediumblue;
-  color: white;
-}
-
 .delete-view {
   background-color: white;
-  color: red;
+  color: $warn-color;
   padding: 8pt;
   border-bottom-width: 1pt;
   border-bottom-color: #ddd;

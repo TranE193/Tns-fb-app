@@ -1,14 +1,12 @@
-.input {
-  font-size: 22pt;
-  margin: 16pt 20pt;
-}
+.grocery-page {
+  TextField {
+    font-size: 22pt;
+    margin-bottom: 20pt;
+  }
 
-.add-btn {
-  background-color: #8e24ff;
-  color: white;
-  font-size: 20pt;
-  margin: 16pt 16pt;
-  padding: 20pt;
+  Button {
+    font-size: 16pt;
+  }
 }
 
 
