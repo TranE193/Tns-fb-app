@@ -4,7 +4,9 @@ import { User } from 'nativescript-plugin-firebase';
 export enum RootActionTypes {
     LoadCurrentUser = '[Root] LoadCurrentUser', LoadCurrentUserSuccess = '[Root] LoadCurrentUserSuccess', LoadCurrentUserFailure = '[Root] LoadCurrentUserFailure',
 
-    Login = '[Root] Login', LoginSuccess = '[Root] LoginSuccess', LoginFailure = '[Root] LoginFailure', CreateUser = '[Root] CreateUser', CreateUserSuccess = '[Root] CreateUserSuccess', CreateUserFailure = '[Root] CreateUserFailure',
+    Login = '[Root] Login', LoginSuccess = '[Root] LoginSuccess', LoginFailure = '[Root] LoginFailure',
+
+    CreateUser = '[Root] CreateUser', CreateUserSuccess = '[Root] CreateUserSuccess', CreateUserFailure = '[Root] CreateUserFailure',
 
     Logout = '[Root] Logout', LogoutSuccess = '[Root] LogoutSuccess', LogoutFailure = '[Root] LogoutFailure',
 }

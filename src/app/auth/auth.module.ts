@@ -13,8 +13,7 @@ import { AuthResolver } from '~/app/auth/+state/resolvers/auth.resolver';
 @NgModule({
     declarations: [LoginComponent, LoginContainerComponent],
     imports: [NativeScriptCommonModule, AuthRoutingModule,
-        StoreModule.forFeature(authFeatureKey, authReducer, { initialState: authInitialState }),
-        EffectsModule.forFeature([AuthEffects])],
+        StoreModule.forFeature(authFeatureKey, authReducer, { initialState: authInitialState }), EffectsModule.forFeature([AuthEffects])],
     providers: [AuthResolver],
     schemas: [NO_ERRORS_SCHEMA]
 })

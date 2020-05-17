@@ -17,8 +17,7 @@ import { AuthModule } from '~/app/auth/auth.module';
         initialState: { root: rootInitialState }, runtimeChecks: {
             strictStateImmutability: true, strictActionImmutability: true
         }
-    }), EffectsModule.forRoot([RootEffects]), !environment.production ? StoreDevtoolsModule.instrument() : [],
-        AuthModule],
+    }), EffectsModule.forRoot([RootEffects]), !environment.production ? StoreDevtoolsModule.instrument() : [], AuthModule],
     providers: [RootResolver],
     declarations: [AppComponent],
     schemas: [NO_ERRORS_SCHEMA]

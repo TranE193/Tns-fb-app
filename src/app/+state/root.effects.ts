@@ -35,6 +35,10 @@ export class RootEffects {
     @Effect() createUser$ = this.actions$.pipe(ofType(RootActionTypes.CreateUser), concatMap((action: CreateUser) => this.userService.createUser(action.payload)
     .pipe(map((payload: User) => new CreateUserSuccess(payload)), catchError(error => of(new CreateUserFailure(error))))));
 
+    // @Effect() createUserSuccess$ = this.actions$.pipe(ofType(RootActionTypes.CreateUserSuccess), concatMap((action: CreateUserSuccess)
+    // => this.userService.sendEmailVerification(action.payload.email) .pipe(tap(() => this.router.navigate(['/'])), catchError(error =>
+    // of(new CreateUserFailure(error))))));
+
     @Effect({ dispatch: false }) createUserSuccess$ = this.actions$.pipe(ofType(RootActionTypes.CreateUserSuccess), tap(() => this.router.navigate(['/'])));
 
     @Effect() logout$ = this.actions$.pipe(ofType(RootActionTypes.Logout), concatMap(() => this.userService.logout()

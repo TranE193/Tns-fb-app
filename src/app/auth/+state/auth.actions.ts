@@ -20,5 +20,8 @@ export class LoadAuthsFailure implements Action {
     constructor(public payload: { error: any }) { }
 }
 
-export type AuthActions = LoadAuths | LoadAuthsSuccess | LoadAuthsFailure;
+export type AuthActions =
+    LoadAuths
+    | LoadAuthsSuccess
+    | LoadAuthsFailure;
 

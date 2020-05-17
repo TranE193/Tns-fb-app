@@ -5,8 +5,6 @@ import { LayoutComponent } from '~/app/shared/components/layout/layout.component
 
 
 @NgModule({
-    declarations: [LayoutComponent],
-    imports: [LayoutRoutingModule, NativeScriptCommonModule],
-    schemas: [NO_ERRORS_SCHEMA]
+    declarations: [LayoutComponent], imports: [LayoutRoutingModule, NativeScriptCommonModule], schemas: [NO_ERRORS_SCHEMA]
 })
 export class LayoutModule {}

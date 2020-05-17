@@ -9,9 +9,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'ns-grocery-list',
-    templateUrl: './grocery-list.component.html',
-    styleUrls: ['./grocery-list.component.scss']
+    selector: 'ns-grocery-list', templateUrl: './grocery-list.component.html', styleUrls: ['./grocery-list.component.scss']
 })
 export class GroceryListComponent {
     filter: string = '';
@@ -74,8 +72,7 @@ export class GroceryListComponent {
     }
 
     onSelectAll() {
-        !this.isAllSelected ? this.myListViewComponent.listView.selectAll() :
-            this.myListViewComponent.listView.deselectAll();
+        !this.isAllSelected ? this.myListViewComponent.listView.selectAll() : this.myListViewComponent.listView.deselectAll();
     }
 
     onCloseSelectMenu() {
@@ -98,8 +95,7 @@ export class GroceryListComponent {
             this.router.navigateByUrl(this.router.router.createUrlTree([item.id], { relativeTo: this.route }));
         } else {
             const selectedGroceries = this.myListViewComponent.listView.getSelectedItems() as Grocery[];
-            selectedGroceries.find(g => g.id === item.id) ?
-                this.myListViewComponent.listView.deselectItemAt(this.groceries.indexOf(item)) :
+            selectedGroceries.find(g => g.id === item.id) ? this.myListViewComponent.listView.deselectItemAt(this.groceries.indexOf(item)) :
                 this.myListViewComponent.listView.selectItemAt(this.groceries.indexOf(item));
         }
     }

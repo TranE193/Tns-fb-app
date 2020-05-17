@@ -7,9 +7,7 @@ import { User } from 'nativescript-plugin-firebase';
 import { rootQuery } from '~/app/+state/root.selectors';
 
 @Component({
-    selector: 'ns-login-container',
-    templateUrl: './login-container.component.html',
-    styleUrls: ['./login-container.component.scss']
+    selector: 'ns-login-container', templateUrl: './login-container.component.html', styleUrls: ['./login-container.component.scss']
 })
 export class LoginContainerComponent implements OnInit {
     email = 'ddseliverstov@gmail.com';

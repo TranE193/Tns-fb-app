@@ -1,7 +1,7 @@
 <ActionBar class="action-bar">
     <GridLayout columns="*, auto">
         <Label class="action-bar-title" column="0" text="Продукты"></Label>
-        <Button *ngIf="currentUser" column="1" text="Выйти" (tap)="onLogout()"></Button>
+        <Button (tap)="onLogout()" *ngIf="currentUser" class="secondary" column="1" text="Выйти"></Button>
     </GridLayout>
 </ActionBar>
 
@@ -30,7 +30,7 @@
                  (itemDeselected)="onItemDeselected($event)"
     >
         <ng-template tkListItemTemplate let-item="item">
-            <StackLayout orientation="horizontal" class="list-item list" Spacing="20pt">
+            <StackLayout orientation="horizontal" class="list-item" Spacing="20pt">
                 <GridLayout columns="*, *" rows="auto, auto" (tap)="onTapItem(item)"
                             (longPress)="onLongPressItem(item)">
                     <Label row="0" col="0" class="list-item__label-name" textwrap="true" [text]="item.name"></Label>
