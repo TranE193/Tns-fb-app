@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { RouterExtensions } from 'nativescript-angular';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { Grocery } from '~/app/shared/models/grocery';
+import { User } from 'nativescript-plugin-firebase';
 
 interface GroceryForm {
     name: string,
@@ -18,6 +19,7 @@ export class GroceryComponent implements OnInit, AfterViewInit {
 
 
     @Input() grocery: Grocery;
+    @Input() currentUser: User;
     @Output() upsertGrocery = new EventEmitter();
     @ViewChild('nameTextField', { static: false }) nameTextField: ElementRef;
 
@@ -53,7 +55,9 @@ export class GroceryComponent implements OnInit, AfterViewInit {
             name: this.groceryForm.name,
             amount: parseInt(this.groceryForm.amount) || 1,
             createdAt: this.grocery ? this.grocery.createdAt : date.toUTCString(),
-            updatedAt: date.toUTCString()
+            updatedAt: date.toUTCString(),
+            createdBy: this.grocery && this.grocery.createdBy ? this.grocery.createdBy : this.currentUser.uid,
+            updatedBy: this.currentUser.uid
         });
 
         this.onBackTap();

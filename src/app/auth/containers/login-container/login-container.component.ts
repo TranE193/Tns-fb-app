@@ -10,8 +10,6 @@ import { rootQuery } from '~/app/+state/root.selectors';
     selector: 'ns-login-container', templateUrl: './login-container.component.html', styleUrls: ['./login-container.component.scss']
 })
 export class LoginContainerComponent implements OnInit {
-    email = 'ddseliverstov@gmail.com';
-    password = 'TranE193';
     currentUser$: Observable<User>;
 
     constructor(private store: Store<RootPartialState>) {

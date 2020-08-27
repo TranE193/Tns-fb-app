@@ -14,6 +14,10 @@ export class UserService {
         return this.firebaseService.createUser(email, password);
     }
 
+    sendEmailVerification(email: string): Observable<boolean> {
+        return this.firebaseService.sendEmailVerification(email);
+    }
+
     getCurrentUser(): Observable<User> {
         return this.firebaseService.getCurrentUser();
     }

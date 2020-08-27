@@ -8,6 +8,7 @@ import { RootPartialState } from '~/app/+state/root.reducer';
 import { Logout } from '~/app/+state/root.actions';
 import { GroceryPartialState } from '~/app/grocery/+state/grocery.reducer';
 import { groceryQuery } from '~/app/grocery/+state/grocery.selectors';
+import { RemoveGrocery, RemoveGroceryList } from '../../+state/grocery.actions';
 
 @Component({
     selector: 'ns-grocery-list-container',
@@ -31,10 +32,10 @@ export class GroceryListContainerComponent implements OnInit {
     }
 
     onRemoveGrocery(groceryId: string) {
-        // this.groceryService.remove(groceryId);
+        this.groceryStore.dispatch(new RemoveGrocery(groceryId));
     }
 
     onRemoveManyGroceries(groceryIds: string[]) {
-        // this.groceryService.removeMany(groceryIds);
+        this.groceryStore.dispatch(new RemoveGroceryList(groceryIds));
     }
 }

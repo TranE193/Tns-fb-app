@@ -8,7 +8,11 @@ export enum GroceryActionTypes {
 
     LoadGroceryList = '[Grocery] LoadGroceryList', LoadGroceryListSuccess = '[Grocery] LoadGroceryListSuccess', LoadGroceryListFailure = '[Grocery] LoadGroceryListFailure',
 
-    CreateGrocery = '[Grocery] CreateGrocery', CreateGrocerySuccess = '[Grocery] CreateGrocerySuccess', CreateGroceryFailure = '[Grocery] CreateGroceryFailure',
+    UpsertGrocery = '[Grocery] UpsertGrocery', UpsertGrocerySuccess = '[Grocery] UpsertGrocerySuccess', UpsertGroceryFailure = '[Grocery] UpsertGroceryFailure',
+
+    RemoveGrocery = '[Grocery] RemoveGrocery', RemoveGrocerySuccess = '[Grocery] RemoveGrocerySuccess', RemoveGroceryFailure = '[Grocery] RemoveGroceryFailure',
+
+    RemoveGroceryList = '[Grocery] RemoveGroceryList', RemoveGroceryListSuccess = '[Grocery] RemoveGroceryListSuccess', RemoveGroceryListFailure = '[Grocery] RemoveGroceryListFailure',
 }
 
 export class LoadGrocery implements Action {
@@ -51,20 +55,52 @@ export class LoadGroceryListFailure implements Action {
     constructor(public payload: string) { }
 }
 
-export class CreateGrocery implements Action {
-    readonly type = GroceryActionTypes.CreateGrocery;
-
-    constructor(public payload: { email: string, password: string }) { }
-}
-
-export class CreateGrocerySuccess implements Action {
-    readonly type = GroceryActionTypes.CreateGrocerySuccess;
+export class UpsertGrocery implements Action {
+    readonly type = GroceryActionTypes.UpsertGrocery;
 
     constructor(public payload: Grocery) { }
 }
 
-export class CreateGroceryFailure implements Action {
-    readonly type = GroceryActionTypes.CreateGroceryFailure;
+export class UpsertGrocerySuccess implements Action {
+    readonly type = GroceryActionTypes.UpsertGrocerySuccess;
+
+    constructor(public payload: Grocery) { }
+}
+
+export class UpsertGroceryFailure implements Action {
+    readonly type = GroceryActionTypes.UpsertGroceryFailure;
+
+    constructor(public payload: string) { }
+}
+
+export class RemoveGrocery implements Action {
+    readonly type = GroceryActionTypes.RemoveGrocery;
+
+    constructor(public payload: string) { }
+}
+
+export class RemoveGrocerySuccess implements Action {
+    readonly type = GroceryActionTypes.RemoveGrocerySuccess;
+}
+
+export class RemoveGroceryFailure implements Action {
+    readonly type = GroceryActionTypes.RemoveGroceryFailure;
+
+    constructor(public payload: string) { }
+}
+
+export class RemoveGroceryList implements Action {
+    readonly type = GroceryActionTypes.RemoveGroceryList;
+
+    constructor(public payload: string[]) { }
+}
+
+export class RemoveGroceryListSuccess implements Action {
+    readonly type = GroceryActionTypes.RemoveGroceryListSuccess;
+}
+
+export class RemoveGroceryListFailure implements Action {
+    readonly type = GroceryActionTypes.RemoveGroceryListFailure;
 
     constructor(public payload: string) { }
 }
@@ -77,7 +113,13 @@ export type GroceryAction =
     | LoadGroceryList
     | LoadGroceryListSuccess
     | LoadGroceryListFailure
-    | CreateGrocery
-    | CreateGrocerySuccess
-    | CreateGroceryFailure;
+    | UpsertGrocery
+    | UpsertGrocerySuccess
+    | UpsertGroceryFailure
+    | RemoveGrocery
+    | RemoveGrocerySuccess
+    | RemoveGroceryFailure
+    | RemoveGroceryList
+    | RemoveGroceryListSuccess
+    | RemoveGroceryListFailure;
 

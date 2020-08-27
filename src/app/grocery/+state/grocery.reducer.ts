@@ -51,7 +51,7 @@ export function groceryReducer(state: GroceryState = initialState, action: Groce
             };
             break;
 
-        case GroceryActionTypes.CreateGrocerySuccess:
+        case GroceryActionTypes.UpsertGrocerySuccess:
             state = {
                 ...state, grocery: action.payload
             };

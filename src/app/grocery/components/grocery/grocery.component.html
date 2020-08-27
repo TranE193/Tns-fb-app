@@ -4,6 +4,7 @@
 </ActionBar>
 
 <StackLayout class="p-20 grocery-page">
+    <Label [text]="currentUser ? currentUser.uid: 'sds'"></Label>
     <TextField #nameTextField
                row="0"
                hint="Продукт"
